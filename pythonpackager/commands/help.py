@@ -27,6 +27,6 @@ class HelpCommand(Command):
             if command.hidden:
                 continue
             print('  %s: %s' % (command.name, command.summary))
-        return SUCCESS
+        return
 
 HelpCommand()

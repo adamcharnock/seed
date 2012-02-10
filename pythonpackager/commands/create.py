@@ -7,6 +7,7 @@ from pythonpackager.commands import Command
 
 class CreateCommand(Command):
     name = "create"
+    summary = "Create a skeleton package in the current directory"
     
     def __init__(self):
         super(CreateCommand, self).__init__()
