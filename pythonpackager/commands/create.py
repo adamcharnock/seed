@@ -95,7 +95,7 @@ class CreateCommand(Command):
                     "package_name": package_name,
                     "version": version,
                 }
-                import pdb; pdb.set_trace();
+                
                 if self.dry_run:
                     print "Would have created file %s" % file
                 else:
