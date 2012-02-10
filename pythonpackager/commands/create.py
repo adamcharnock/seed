@@ -115,7 +115,11 @@ This file will be added to as part of each release
 ----
 """
 
-TEMPLATE_LICENSE = """Put your license in this file"""
+TEMPLATE_LICENSE = """Put your license in this file
+
+A list of many open source licenses can be found here:
+http://www.opensource.org/licenses/category
+"""
 
 TEMPLATE_MANIFEST = """include *.txt
 recursive-include docs *"""
