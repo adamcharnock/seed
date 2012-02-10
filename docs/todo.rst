@@ -2,9 +2,9 @@ Todo & planning
 ===============
 
 * Create a basic wrapper (done)
-* ``create`` command
+* ``create`` command (done)
 
-  * Creates a `default directory structure`_
+  * Creates a `default directory structure`_ (done)
   
 * ``release`` command
 
