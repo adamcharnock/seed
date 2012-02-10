@@ -5,6 +5,8 @@ from pip.backwardcompat import walk_packages
 from pythonpackager.baseparser import parser
 from pythonpackager.commands import load_command, command_dict
 
+__version__ = "0.1.0"
+
 def version_control():
     # Import all the version control support modules:
     from pythonpackager import vcs

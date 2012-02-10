@@ -72,7 +72,7 @@ class CreateCommand(Command):
                 if self.dry_run:
                     print "Would have created directory %s" % dir
                 else:
-                    os.mkdir(dir, mode=0755)
+                    os.mkdir(dir, 0755)
     
     def create_files(self, project_dir, package_name, version):
         files = [
@@ -99,9 +99,9 @@ class CreateCommand(Command):
                 if self.dry_run:
                     print "Would have created file %s" % file
                 else:
-                    with os.open(file, os.O_WRONLY) as f:
-                        f.write()
-                    os.chmod(file, mode=0644)
+                    with open(file, "w+") as f:
+                        f.write(content)
+                    os.chmod(file, 0644)
         
         if not self.dry_run:
             os.chmod(project_dir / "setup.py", 0755)
