@@ -29,7 +29,6 @@ class Command(object):
     name = None
     usage = None
     hidden = False
-    summary = ""
 
     def __init__(self):
         assert self.name

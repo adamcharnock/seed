@@ -14,6 +14,6 @@ setup(
     long_description=open('README.rst').read(),
     entry_points=dict(console_scripts=['pythonpackager=pythonpackager:main']),
     install_requires=[
-        "path.py",
+        "path.py>=2.2.2",
     ],
 )
