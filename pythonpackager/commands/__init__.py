@@ -1,6 +1,8 @@
 import optparse
 import sys
 
+from pip.backwardcompat import walk_packages
+
 from pythonpackager.baseparser import parser
 
 command_dict = {}
@@ -13,6 +15,15 @@ def load_command(name):
         __import__(full_name)
     except ImportError:
         pass
+
+def load_all_commands():
+    for name in command_names():
+        load_command(name)
+
+def command_names():
+    from pythonpackager import commands
+    names = set((pkg[1] for pkg in walk_packages(path=commands.__path__)))
+    return list(names)
 
 class Command(object):
     name = None
@@ -38,4 +49,4 @@ class Command(object):
         # TODO: Catch exceptions from command.run()
         # TODO: Setup logging in some way
         
-        self.run(args, options)
+        self.run(options, args)
