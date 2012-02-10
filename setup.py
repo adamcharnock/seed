@@ -6,7 +6,7 @@ setup(
     version=__version__,
     author='Adam Charnock',
     author_email='adam@playnice.ly',
-    packages=['pythonpackager'],
+    packages=['pythonpackager', 'pythonpackager.commands', 'pythonpackager.vcs'],
     scripts=[],
     url='',
     license='LICENSE.txt',
