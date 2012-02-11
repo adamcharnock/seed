@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 from path import path
 import fileinput
 from datetime import datetime
@@ -87,11 +88,11 @@ class ReleaseCommand(Command):
         print "This release will be version %s" % next_version
         
         # Running checks
-        print "Running package sanity checks"
-        try:
-            run_command("python setup.py check")
-        except ShellCommandError, e:
-            print "Checks failed. Messages were:\n%s" % e.output
+        print "Running package sanity checks on setup.py"
+        output = run_command("python setup.py check")
+        warnings = [l.split("check: ")[1] for l in output.split("\n") if "check: " in l]
+        if warnings:
+            print "Checks on setup.py failed. Messages were:\n%s" % "\n".join(warnings)
             sys.exit(1)
         
         # Update the version number
