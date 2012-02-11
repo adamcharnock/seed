@@ -4,6 +4,16 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.0, Sat 11 Feb 2012
+===============================
+
+f19b196912	Adding '--register' option and fixing bug in version bumping code (Adam Charnock)
+bf2f28dbcd	Renaming the project to Seed (Adam Charnock)
+93f962eed3	Fixing link in docs (Adam Charnock)
+cad7eb3606	Adding to the docs (Adam Charnock)
+e79a34fb4d	Updates to the docs (Adam Charnock)
+
+
 Version 0.1.2, Sat 11 Feb 2012
 ===============================
 
