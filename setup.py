@@ -10,7 +10,7 @@ setup(
     scripts=[],
     url='https://github.com/adamcharnock/seed',
     license='LICENSE.txt',
-    description='',
+    description='A utility for easily creating and releasing Python packages',
     long_description=open('README.rst').read(),
     entry_points=dict(console_scripts=['seed=seed:main']),
     install_requires=[
