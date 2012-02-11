@@ -142,6 +142,13 @@ class ReleaseCommand(Command):
             print "Tagging new version"
             vcs.tag(next_version)
         
+        if options.push and hasattr(vcs, "push"):
+            if options.dry_run:
+                print "Would have pushed changes"
+            else:
+                print "Pushing changes"
+                vcs.push()        
+        
         # Now register/upload the package
         if options.dry_run:
             print "Would have updated PyPi"
@@ -152,12 +159,6 @@ class ReleaseCommand(Command):
                 run_command("python setup.py register sdist upload")
             else:
                 run_command("python setup.py sdist upload")
-        
-        if options.push and hasattr(vcs, "push"):
-            if options.dry_run:
-                print "Would have pushed changes"
-            else:
-                vcs.push()
         
         print "All done!"
         if not options.dry_run:
