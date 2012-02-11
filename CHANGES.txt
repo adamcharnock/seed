@@ -3,3 +3,9 @@ Change-log for python-packager.
 This file will be added to as part of each release
 
 ----
+
+Version 0.1.0 (first version), Sat 11 Feb 2012
+===============================================
+
+
+
