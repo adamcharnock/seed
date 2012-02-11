@@ -35,7 +35,7 @@ class CreateCommand(Command):
             help="Don't actually create anything, just show what will be created")
     
     def run(self, options, args):
-        version = options.release
+        version = options.version
         
         self.dry_run = options.dry_run
         
@@ -43,12 +43,13 @@ class CreateCommand(Command):
             raise CommandError("Project directory %s is not empty. Use -f for force.")
         
         self.create_dirs()
-        self.create_files(self.project_dir, self.package_name, version)
+        self.create_files(version)
         
         print "All done!"
-        print "You'll need to make some changes to setup.py (see the comments),"
-        print "and putting something sensible in LICENSE.txt & README.rst "
-        print "is probably a good idea."
+        if not self.dry_run:
+            print "You'll need to make some changes to setup.py (see the comments),"
+            print "and putting something sensible in LICENSE.txt & README.rst "
+            print "is probably a good idea."
     
     def create_dirs(self):
         dirs = [
