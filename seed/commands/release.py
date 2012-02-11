@@ -70,6 +70,14 @@ class ReleaseCommand(Command):
             action='store_true',
             default=False,
             help="This is the first release. Register this package with PyPi, don't increment the version number, don't write changes to the changelog")
+        
+        self.parser.add_option(
+            '-g', '--register',
+            dest='register',
+            action='store_true',
+            default=False,
+            help="Force the package to be registered with PyPi.")
+        
     
     def run(self, options, args):
         project_dir = path(os.getcwd())
@@ -140,7 +148,7 @@ class ReleaseCommand(Command):
         else:
             print "Uploading to PyPi"
             print "(This may take a while, grab a cuppa. You've done a great job!)"
-            if options.initial:
+            if options.initial or options.register:
                 run_command("python setup.py register sdist upload")
             else:
                 run_command("python setup.py sdist upload")
@@ -221,7 +229,12 @@ class ReleaseCommand(Command):
         
         bits += [0] * (3 - len(bits)) # pad to 3 digits
         
+        # Increment the version
         bits[indexes[type]] += 1
+        
+        # Set the subsequent digits to 0
+        for i in range(indexes[type] + 1, 3):
+            bits[i] = 0
         
         return ".".join(map(str, bits))
     
