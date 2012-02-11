@@ -56,14 +56,12 @@ then you are probably fine, but you may need to do a little hacking otherwise.
 Source
 ======
 
-Is on GitHub_.
+Is on `GitHub <https://github.com/adamcharnock/python-packager>`_.
 
 The name
 ========
 
 Sucks, any suggestions?
-
-.. _GitHub: https://github.com/adamcharnock/python-packager
 
 Other notes & about the author
 ==============================
