@@ -71,6 +71,13 @@ class ReleaseCommand(Command):
             default=False,
             help="Force the package to be registered with PyPi.")
         
+        self.parser.add_option(
+            '-p', '--push',
+            dest='push',
+            action='store_true',
+            default=False,
+            help="Push changes when complete (for distributed VCS only)")
+        
     
     def run(self, options, args):
         vcs = get_suitable_vcs()
@@ -145,6 +152,12 @@ class ReleaseCommand(Command):
                 run_command("python setup.py register sdist upload")
             else:
                 run_command("python setup.py sdist upload")
+        
+        if options.push and hasattr(vcs, "push"):
+            if options.dry_run:
+                print "Would have pushed changes"
+            else:
+                vcs.push()
         
         print "All done!"
         if not options.dry_run:

@@ -31,6 +31,9 @@ class GitVcs(BaseVcs):
         name = self.make_tag_name(version)
         run_command("git tag %s" % quote(name))
     
+    def push(self):
+        run_command("git push --tags")
+    
     def get_download_url(self, version):
         return None
     
