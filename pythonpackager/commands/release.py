@@ -133,7 +133,7 @@ class ReleaseCommand(Command):
             print "Tagging new version"
             vcs.tag(next_version)
         
-        # Now register the package (if this is the initial version)
+        # Now register/upload the package
         if options.dry_run:
             print "Would have updated PyPi"
         else:
