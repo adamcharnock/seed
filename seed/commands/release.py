@@ -187,7 +187,7 @@ class ReleaseCommand(Command):
         changelog = self.project_dir / "CHANGES.txt"
         
         # Create the file if it doesn't exist
-        if not os.path.exists(changelog) or not os.path.getsize(changelog) == 0:
+        if not os.path.exists(changelog) or os.path.getsize(changelog) == 0:
             with open(changelog, "w+") as f:
                 f.write("----\n")
         
