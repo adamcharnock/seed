@@ -183,21 +183,40 @@ class ReleaseCommand(Command):
                 print line,
     
     def write_changelog(self, changes, next_version):
+        changelog = self.project_dir / "CHANGES.txt"
+        
+        # Create the file if it doesn't exist
+        if not os.path.exists(changelog) or not os.path.getsize(changelog) == 0:
+            with open(changelog, "w+") as f:
+                f.write("----\n")
+        
         # This will captute STDOUT and overwrite the file
         written = False
-        for line in fileinput.input(self.project_dir / "CHANGES.txt", inplace=1):
+        for line in fileinput.input(changelog, inplace=1):
             print line,
             if not written and line.startswith("----"):
-                written = True
-                
                 # Write our new log messages
-                
-                date = datetime.now().strftime("%a %d %b %Y")
-                header = "\nVersion %s, %s" % (next_version, date)
-                print "%s\n%s\n\n" % (header, "=" * len(header)),
-                for commit, author, message in changes:
-                    print "%s\t%s (%s)" % (commit, message, author)
-                print "\n",
+                written = True
+                print self.make_changelog_text(changes, next_version)
+        
+        if not written:
+            # Didn't write anything, so lets just append it now
+            with open(changelog, "a") as f:
+                f.write("----\n")
+                f.write(self.make_changelog_text())
+        
+
+    
+    def make_changelog_text(self, changes, next_version):
+        text = ""
+        
+        date = datetime.now().strftime("%a %d %b %Y")
+        header = "\nVersion %s, %s" % (next_version, date)
+        text += "%s\n%s\n\n" % (header, "=" * len(header))
+        for commit, author, message in changes:
+            text += "%s\t%s (%s)\n" % (commit, message, author)
+        text += "\n"
+        return text
     
     def version_bump(self, version, type="bug"):
         """
