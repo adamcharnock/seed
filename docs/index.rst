@@ -25,9 +25,25 @@ lower the time & effort needed to create and release Python packages.
 Installation
 ============
 
-::
+Installed Seed is easy using pip::
 
     pip install seed
+
+PyPi registration
+-----------------
+
+To start releasing packages you are also going to need to 
+`register with PyPi <http://pypi.python.org/pypi?%3Aaction=register_form>`_. Now place 
+your login details into ``~/.pypirc`` as follows::
+
+    [server-login]
+    username:yourusername
+    password:yourpassword
+
+.. note::
+
+    Storing your password in plaintext is clearly not ideal. If anyone knows of a workaround 
+    I would love to hear it.
 
 Getting started
 ===============
