@@ -10,6 +10,18 @@ Welcome to Python Packager's documentation!
    :maxdepth: 2
    
 
+Python Packager is an experiment in making releasing PyPi packages trivially 
+easy. For example, the `release` command will:
+
+* Increment the version number in `__init__.py`
+* Update CHANGES.txt with commit summaries & authors
+* Tag the release
+* Commit the above changes
+* Register/upload your package to PyPi
+
+I am not sure if a need for this exists, but my hope is that it will 
+lower the time & effort needed to create and release Python packages.
+
 Installation
 ============
 
@@ -52,3 +64,24 @@ The name
 Sucks, any suggestions?
 
 .. _GitHub: https://github.com/adamcharnock/python-packager
+
+Other notes & about the author
+==============================
+
+The structure of Python Packager is heavily based on that of `pip <https://github.com/pypa/pip/>`_. 
+It is still a bit rough around the edges, but the basic stuff is there.
+
+I find myself managing a lot of packages as I always have a number of Django projects on the go 
+and sharing reusable code is always a plus. I also use Heroku a lot, but Heroku doesn't play 
+nicely when installing dependencies via external URLs, hence my desire to release more packages 
+to PyPi rather than just installing them right out of GutHub.
+
+You can find me on...
+
+* `Twitter <http://twitter.com/adamcharnock>`_
+* `GitHub <http://github.com/adamcharnock>`_
+
+I work on...
+
+* `PlayNice.ly <http://playnice.ly>`_ - Project management for software developers
+* `Continuous.io <http://continuous.io>`_ - Hosted continuous integration (beta)
