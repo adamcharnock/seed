@@ -4,6 +4,15 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.3, Sat 11 Feb 2012
+===============================
+
+c58d0e5544	Adding --push option for optionally pushing changes when complete (Adam Charnock)
+077a8e039c	Adding --dry-run to quickstart docs (Adam Charnock)
+3d05d6061b	Some fixes to the 'create' command (Adam Charnock)
+60cb375195	writing a little less whitespace to the changelog (Adam Charnock)
+
+
 Version 0.2.2, Sat 11 Feb 2012
 ===============================
 
