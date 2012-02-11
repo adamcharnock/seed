@@ -2,7 +2,7 @@ import os
 import re
 from path import path
 import fileinput
-import datetime
+from datetime import datetime
 
 from distutils.version import LooseVersion
 
@@ -75,13 +75,13 @@ class ReleaseCommand(Command):
         if options.dry_run:
             print "Version would be bumped to %s" % next_version
         else:
-            self.write_version(package_dir, version)
+            self.write_version(package_dir, next_version)
         
         changes = vcs.get_changes(previous_version)
         if options.dry_run:
             print "Would have written %d changes to changelog" % len(changes)
         else:
-            self.write_changelog(project_dir, changes, next_vesion)
+            self.write_changelog(project_dir, changes, next_version)
         
         # Now do the commit
         
@@ -114,9 +114,8 @@ class ReleaseCommand(Command):
     def write_version(self, package_dir, version):
         # This will captute STDOUT and overwrite the file
         for line in fileinput.input(package_dir / "__init__.py", inplace=1):
-            # Don't forget your trailing commas (supresses extra new lines)
             if line.startswith("__version__ = "):
-                print '__version__ = "%s"' % version,
+                print '__version__ = "%s"' % version
             else:
                 print line,
     

@@ -3,3 +3,11 @@ Change-log for python-packager.
 This file will be added to as part of each release
 
 ----
+
+Version 0.1.1, Sat 11 Feb 2012
+===============================
+
+867ef8ef20	Release command fixes (Adam Charnock)
+906aeac9d0	Lots of work on the release command (Adam Charnock)
+5ecb047fb6	Work on the Git/GitHub vcs systems (Adam Charnock)
+
