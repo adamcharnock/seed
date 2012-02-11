@@ -4,6 +4,15 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.1.2, Sat 11 Feb 2012
+===============================
+
+1c8630c2e4	Message display logic update (Adam Charnock)
+f1cf23f204	Fixes to changelog parsing (Adam Charnock)
+2372cbd46b	further comment tweaks (Adam Charnock)
+3566c2e513	Minor comment and message tweaks (Adam Charnock)
+
+
 Version 0.1.1, Sat 11 Feb 2012
 ===============================
 
