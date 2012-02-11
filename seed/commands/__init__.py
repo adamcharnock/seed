@@ -75,18 +75,27 @@ class Command(object):
         self.project_dir = path(os.getenv('PWD') or os.getcwd())
         self.project_name = self.project_dir.name
         
+        # Descend into the 'src' directory to find the package 
+        # if necessary
+        if os.path.isdir(self.project_dir / "src"):
+            package_search_dir = self.project_dir / "src"
+        else:
+            package_search_dir = self.project_dir
+        
         if package_name:
             self.package_name = package_name
-        else:
+        else:   
             # Try and work out the package name
-            possibles = [n for n in os.listdir(self.project_dir) if os.path.isdir(self.project_dir / n)]
+            possibles = [n for n in os.listdir(package_search_dir) if os.path.isdir(package_search_dir / n)]
             close = difflib.get_close_matches(self.project_name, possibles, n=1, cutoff=0.8)
-            
+            import pdb; pdb.set_trace();
             if not close:
                 raise CommandError("Could not guess the package name. Specify it using --name.")
             
             self.package_name = close[0]
         
-        self.package_dir = self.project_dir / self.package_name
+        self.package_dir = package_search_dir / self.package_name
+            
+        
     
 

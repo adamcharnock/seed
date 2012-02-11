@@ -77,7 +77,7 @@ class ReleaseCommand(Command):
         previous_version = self.read_version()
         
         if not previous_version:
-            raise CommandError("Could not determine version. Make sure your %s/__init__.py file contains '__version__ = \"1.2.3\"'" % self.package_name)
+            raise CommandError("Could not determine version. Make sure your root __init__.py file contains '__version__ = \"1.2.3\"'")
         
         if options.initial:
             # We don't increment the version number for the initial commit
