@@ -50,6 +50,7 @@ Getting started
 
 If you need an entirely fresh package then you can do this::
 
+    seed create --dry-run  # Do a dry run to make sure everything looks right
     seed create
 
 You can also pass a few options to the ``create`` command. See the help for details::
@@ -59,6 +60,7 @@ You can also pass a few options to the ``create`` command. See the help for deta
 
 If you already have a package you can release it using::
 
+    seed release --dry-run  # Do a dry run to make sure everything looks right
     seed release
 
 Again, options are documented here::
