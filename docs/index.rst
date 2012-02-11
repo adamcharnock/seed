@@ -11,9 +11,9 @@ Welcome to Seed's documentation!
    
 
 Seed is an experiment in making releasing PyPi packages trivially 
-easy. For example, the `release` command will:
+easy. For example, the ``release`` command will:
 
-* Increment the version number in `__init__.py`
+* Increment the version number in ``__init__.py``
 * Update CHANGES.txt with commit summaries & authors
 * Tag the release
 * Commit the above changes
@@ -25,7 +25,7 @@ lower the time & effort needed to create and release Python packages.
 Installation
 ============
 
-Installed Seed is easy using pip::
+Installing Seed is easy using pip::
 
     pip install seed
 
@@ -52,7 +52,7 @@ If you need an entirely fresh package then you can do this::
 
     seed create
 
-You can also pass a few options to the `create` command. See the help for details::
+You can also pass a few options to the ``create`` command. See the help for details::
 
     seed help create
 
@@ -66,7 +66,7 @@ Again, options are documented here::
     seed help release
 
 **Notes on releasing:** The release process makes a bunch of assumptions 
-about your project. If you created your project using the `create` command, 
+about your project. If you created your project using the ``create`` command, 
 then you are probably fine, but you may need to do a little hacking otherwise.
 
 Source
