@@ -47,7 +47,7 @@ class CreateCommand(Command):
     def run(self, options, args):
         project_dir = path(os.getcwd())
         package_name = options.package_name
-        version = options.package_name
+        version = options.release
         
         self.dry_run = options.dry_run
         

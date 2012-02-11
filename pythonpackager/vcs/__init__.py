@@ -44,8 +44,8 @@ class BaseVcs(object):
         """Is this VCS class available for the given project directory"""
         pass
     
-    def get_changes(self, since_tag_name):
-        """Get a list of changes since (and not including) the given tag name
+    def get_changes(self, since_version):
+        """Get a list of changes since (and not including) the given version name
         
         Output should be in the format:
         [
@@ -59,15 +59,18 @@ class BaseVcs(object):
         """Commit the changes to files"""
         pass
     
-    def tag(self, name):
+    def tag(self, version):
         """Tag the current version as 'name'"""
         pass
     
-    def get_download_url(self, tag_name):
+    def get_download_url(self, version):
         """
-        Get the download url for 'tag_name'.
+        Get the download url for the given version.
         
         Return None if unsupported
         """
         pass
+    
+    def make_tag_name(self, version):
+        return "v%s" % version
     

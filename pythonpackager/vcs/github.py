@@ -40,7 +40,8 @@ class GitHubVcs(GitVcs):
         # Parse out into user & repo
         return re.search(r"([a-z0-9-_]+)/([a-z0-9-_]+)", url).groups()
     
-    def get_download_url(self, tag_name):
+    def get_download_url(self, version):
+        tag_name = self.make_tag_name(version)
         user, repo = self.get_user_repo()
         return GH_DOWNLOAD_URL % (user, repo, tag_name)
     
