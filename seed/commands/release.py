@@ -161,7 +161,7 @@ class ReleaseCommand(Command):
                 run_command("python setup.py sdist upload")
         
         print "All done!"
-        if not options.dry_run:
+        if not options.dry_run and not options.push:
             print "We have made changes, but not pushed. Git users should probably do: "
             print "    git push --tags"
     
