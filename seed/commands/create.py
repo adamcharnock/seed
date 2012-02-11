@@ -45,28 +45,26 @@ class CreateCommand(Command):
             help="Don't actually create anything, just show what will be created")
     
     def run(self, options, args):
-        project_dir = path(os.getcwd())
-        package_name = options.package_name
         version = options.release
         
         self.dry_run = options.dry_run
         
-        if not options.force and os.listdir(project_dir):
+        if not options.force and os.listdir(self.project_dir):
             raise CommandError("Project directory %s is not empty. Use -f for force.")
         
-        self.create_dirs(project_dir, package_name)
-        self.create_files(project_dir, package_name, version)
+        self.create_dirs()
+        self.create_files(self.project_dir, self.package_name, version)
         
         print "All done!"
         print "You'll need to make some changes to setup.py (see the comments),"
         print "and putting something sensible in LICENSE.txt & README.rst "
         print "is probably a good idea."
     
-    def create_dirs(self, project_dir, package_name):
+    def create_dirs(self):
         dirs = [
-            project_dir / "bin", 
-            project_dir / "docs", 
-            project_dir / package_name,
+            self.project_dir / "bin", 
+            self.project_dir / "docs", 
+            self.package_name,
         ]
         
         for dir in dirs:
@@ -80,14 +78,14 @@ class CreateCommand(Command):
                 else:
                     os.mkdir(dir, 0755)
     
-    def create_files(self, project_dir, package_name, version):
+    def create_files(self, version):
         files = [
-            (project_dir / "CHANGES.txt", TEMPLATE_CHANGES),
-            (project_dir / "LICENSE.txt", TEMPLATE_LICENSE),
-            (project_dir / "MANIFEST.in", TEMPLATE_MANIFEST),
-            (project_dir / "README.rst", TEMPLATE_README),
-            (project_dir / "setup.py", TEMPLATE_SETUP),
-            (project_dir / package_name / "__init__.py", TEMPLATE_INIT),
+            (self.project_dir / "CHANGES.txt", TEMPLATE_CHANGES),
+            (self.project_dir / "LICENSE.txt", TEMPLATE_LICENSE),
+            (self.project_dir / "MANIFEST.in", TEMPLATE_MANIFEST),
+            (self.project_dir / "README.rst", TEMPLATE_README),
+            (self.project_dir / "setup.py", TEMPLATE_SETUP),
+            (self.package_dir / "__init__.py", TEMPLATE_INIT),
         ]
         
         for file, template in files:
@@ -97,8 +95,8 @@ class CreateCommand(Command):
                 raise CommandError("File %s exists and is not a regular file" % dir)
             else:
                 content = template % {
-                    "project_name": project_dir.name,
-                    "package_name": package_name,
+                    "project_name": self.project_name,
+                    "package_name": self.package_name,
                     "version": version,
                 }
                 
@@ -110,7 +108,7 @@ class CreateCommand(Command):
                     os.chmod(file, 0644)
         
         if not self.dry_run:
-            os.chmod(project_dir / "setup.py", 0755)
+            os.chmod(self.project_dir / "setup.py", 0755)
 
 CreateCommand()
 

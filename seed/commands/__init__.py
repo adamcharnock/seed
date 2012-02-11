@@ -1,9 +1,13 @@
 import optparse
 import sys
+import difflib
+import os
 
+from path import path
 from pip.backwardcompat import walk_packages
 
 from seed.baseparser import parser
+from seed.exceptions import CommandError
 
 command_dict = {}
 
@@ -41,7 +45,16 @@ class Command(object):
                 # -h, --version, etc
                 continue
             self.parser.add_option(option)
+        
         command_dict[self.name] = self
+        
+        self.parser.add_option(
+            '-n', '--name',
+            dest='package_name',
+            action='store',
+            default='',
+            type='str',
+            help='The package name. Will default to the current directory name, lower cased, and with dashes stripped.')
     
     def main(self, args, initial_options):
         options, args = self.parser.parse_args(args)
@@ -50,4 +63,26 @@ class Command(object):
         # TODO: Catch exceptions from command.run()
         # TODO: Setup logging in some way
         
+        self.determine_paths(options.package_name)
+        
         self.run(options, args)
+    
+    def determine_paths(self, package_name=None):
+        self.project_dir = path(os.getcwd())
+        self.project_name = self.project_dir.name
+        
+        if package_name:
+            self.package_name = package_name
+        else:
+            # Try and work out the package name
+            possibles = [n for n in os.listdir(self.project_dir) if os.path.isdir(self.project_dir / n)]
+            close = difflib.get_close_matches(self.project_name, possibles, n=1, cutoff=0.8)
+            
+            if not close:
+                raise CommandError("Could not guess the package name. Specify it using --name.")
+            
+            self.package_name = close[0]
+        
+        self.package_dir = self.project_dir / self.package_name
+    
+

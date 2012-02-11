@@ -21,14 +21,6 @@ class ReleaseCommand(Command):
         default_name = path(os.getcwd()).name.lower().replace("-", "")
         
         self.parser.add_option(
-            '-n', '--name',
-            dest='package_name',
-            action='store',
-            default=default_name,
-            type='str',
-            help='The package name. Will default to the current directory name, lower cased, and with dashes stripped.')
-        
-        self.parser.add_option(
             '-r', '--release',
             dest='version',
             action='store',
@@ -80,17 +72,13 @@ class ReleaseCommand(Command):
         
     
     def run(self, options, args):
-        project_dir = path(os.getcwd())
-        package_name = options.package_name
-        package_dir = project_dir / package_name
-        
         vcs = get_suitable_vcs()
-        previous_version = self.read_version(package_dir)
+        previous_version = self.read_version()
         if options.initial:
             # We don't increment the version number for the initial commit
             next_version = previous_version
         else:
-            next_version = self.get_next_version(options, package_dir, previous_version)
+            next_version = self.get_next_version(options, previous_version)
         
         print "This release will be version %s" % next_version
         
@@ -108,7 +96,7 @@ class ReleaseCommand(Command):
             print "Version would be set to %s" % next_version
         else:
             print "Version written"
-            self.write_version(package_dir, next_version)
+            self.write_version(next_version)
         
         # Update the changelog
         
@@ -121,14 +109,14 @@ class ReleaseCommand(Command):
         else:
             print "Updating changelog"
             if options.initial:
-                self.write_changelog(project_dir, [], "%s (first version)" % next_version)
+                self.write_changelog([], "%s (first version)" % next_version)
             else:
                 changes = vcs.get_changes(previous_version)
-                self.write_changelog(project_dir, changes, next_version)
+                self.write_changelog(changes, next_version)
         
         # Commit the changes we have made
         
-        commit_files = [project_dir / "CHANGES.txt", package_dir / "__init__.py"]
+        commit_files = [self.project_dir / "CHANGES.txt", self.package_dir / "__init__.py"]
         if options.dry_run:
             print "Would have committed changes to: %s" % ", ".join(commit_files)
         else:
@@ -158,7 +146,7 @@ class ReleaseCommand(Command):
             print "We have made changes, but not pushed. Git users should probably do: "
             print "    git push --tags"
     
-    def get_next_version(self, options, package_dir, previous_version):
+    def get_next_version(self, options, previous_version):
         if options.version:
             return options.version
         
@@ -169,8 +157,8 @@ class ReleaseCommand(Command):
         
         return self.version_bump(previous_version, type)
     
-    def read_version(self, package_dir):
-        with open(package_dir / "__init__.py", "r") as f:
+    def read_version(self):
+        with open(self.package_dir / "__init__.py", "r") as f:
             # Read the first 1k - should be safe to assume the 
             # version is in there somewhere
             contents = f.read(1024)
@@ -178,18 +166,18 @@ class ReleaseCommand(Command):
         version = re.search(r"__version__ = ['\"](.*?)['\"]", contents).group(1)
         return version
     
-    def write_version(self, package_dir, version):
+    def write_version(self, version):
         # This will captute STDOUT and overwrite the file
-        for line in fileinput.input(package_dir / "__init__.py", inplace=1):
+        for line in fileinput.input(self.package_dir / "__init__.py", inplace=1):
             if line.startswith("__version__ = "):
                 print '__version__ = "%s"' % version
             else:
                 print line,
     
-    def write_changelog(self, project_dir, changes, next_version):
+    def write_changelog(self, changes, next_version):
         # This will captute STDOUT and overwrite the file
         written = False
-        for line in fileinput.input(project_dir / "CHANGES.txt", inplace=1):
+        for line in fileinput.input(self.project_dir / "CHANGES.txt", inplace=1):
             print line,
             if not written and line.startswith("----"):
                 written = True
