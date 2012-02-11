@@ -4,6 +4,26 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.1, Sat 11 Feb 2012
+===============================
+
+da25d1efa4	Updating help for release command (Adam Charnock)
+b993a1e8d8	Fixing bug with changelog creation (Adam Charnock)
+2472418268	Fixing sanity checking (Adam Charnock)
+b626a5277c	Adding package description (Adam Charnock)
+0537b7622b	Additional comment to update description (Adam Charnock)
+958c9b0748	Fixing --name option duplication causing error (Adam Charnock)
+8296367ff0	Files now added before calling git commit (Adam Charnock)
+2775e054b0	Making changelog writing a little more robust (Adam Charnock)
+9ac21cfab1	No longer dereferencing sym links (Adam Charnock)
+31d1e57ba0	Adding error handling for missing __version__ definition (Adam Charnock)
+54a61b6d08	Adding smart detection of package name (Adam Charnock)
+b2e71d1221	addition to gitignore (Adam Charnock)
+962b0eecf6	Formatting and spelling tweaks to docs (Adam Charnock)
+1c508819d7	adding notes to docs about PyPi registration (Adam Charnock)
+
+
+
 Version 0.2.0, Sat 11 Feb 2012
 ===============================
 
