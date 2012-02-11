@@ -24,7 +24,7 @@ class GitVcs(BaseVcs):
     
     def commit(self, message, files):
         quoted_files = " ".join(map(quote, files))
-        run_command("git commit -m %s -f %s", quote(message), quoted_files)
+        run_command("git commit -m %s %s" % (quote(message), quoted_files))
     
     def tag(self, version):
         name = self.make_tag_name(version)

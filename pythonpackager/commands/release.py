@@ -100,7 +100,6 @@ class ReleaseCommand(Command):
         
         # Update the changelog
         
-        changes = vcs.get_changes(previous_version)
         if options.dry_run:
             if options.initial:
                 print "Would have written the initial version to the changelog"
@@ -108,8 +107,9 @@ class ReleaseCommand(Command):
                 print "Would have written %d changes to changelog" % len(changes)
         else:
             if options.initial:
-                self.write_changelog(project_dir, changes, "%s (first version)" % next_version)
+                self.write_changelog(project_dir, [], "%s (first version)" % next_version)
             else:
+                changes = vcs.get_changes(previous_version)
                 self.write_changelog(project_dir, changes, next_version)
         
         # Commit the changes we have made
