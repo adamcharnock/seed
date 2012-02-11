@@ -108,6 +108,7 @@ class ReleaseCommand(Command):
             if options.initial:
                 print "Would have written the initial version to the changelog"
             else:
+                changes = vcs.get_changes(previous_version)
                 print "Would have written %d changes to changelog" % len(changes)
         else:
             print "Updating changelog"

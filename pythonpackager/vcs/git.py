@@ -35,7 +35,7 @@ class GitVcs(BaseVcs):
     
     def parse_log_messages(self, text):
         """Will parse git log messages in the 'short' format"""
-        regex = r"commit ([0-9a-f]+)\nAuthor: (.*?)\n\n(.*?)\n\n"
+        regex = r"commit ([0-9a-f]+)\nAuthor: (.*?)\n\n(.*?)(?:\n\n|$)"
         messages = re.findall(regex, text)
         
         parsed = []
@@ -45,7 +45,6 @@ class GitVcs(BaseVcs):
                 re.sub(r"\s*<.*?>", "", author), # Remove email address if present
                 message.strip()
             ))
-        
         return parsed
     
 
