@@ -68,7 +68,11 @@ class Command(object):
         self.run(options, args)
     
     def determine_paths(self, package_name=None):
-        self.project_dir = path(os.getcwd())
+        """Determine paths automatically and a little intelligently"""
+        
+        # Give preference to the environment variable here as it will not 
+        # derefrence sym links
+        self.project_dir = path(os.getenv('PWD') or os.getcwd())
         self.project_name = self.project_dir.name
         
         if package_name:
