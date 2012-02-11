@@ -88,7 +88,7 @@ class Command(object):
             # Try and work out the package name
             possibles = [n for n in os.listdir(package_search_dir) if os.path.isdir(package_search_dir / n)]
             close = difflib.get_close_matches(self.project_name, possibles, n=1, cutoff=0.8)
-            import pdb; pdb.set_trace();
+            
             if not close:
                 raise CommandError("Could not guess the package name. Specify it using --name.")
             
