@@ -144,7 +144,9 @@ class ReleaseCommand(Command):
             else:
                 run_command("python setup.py sdist upload")
         
-        print "All done! (we have made changes, but not pushed)"
+        print "All done!"
+        print "We have made changes, but not pushed. Git users should probably do: "
+        print "    git push --tags"
     
     def get_next_version(self, options, package_dir, previous_version):
         if options.version:
