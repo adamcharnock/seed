@@ -4,6 +4,14 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.2, Sat 11 Feb 2012
+===============================
+
+70671e08b7	removing debug line (Adam Charnock)
+37589682a3	Now handling the possibility of a 'src' directory (Adam Charnock)
+
+
+
 Version 0.2.1, Sat 11 Feb 2012
 ===============================
 
