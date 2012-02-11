@@ -216,7 +216,6 @@ class ReleaseCommand(Command):
         text += "%s\n%s\n\n" % (header, "=" * len(header))
         for commit, author, message in changes:
             text += "%s\t%s (%s)\n" % (commit, message, author)
-        text += "\n"
         return text
     
     def version_bump(self, version, type="bug"):
