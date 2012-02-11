@@ -1,10 +1,15 @@
 from distutils.version import LooseVersion
 
 from pythonpackager.commands import Command
+from pythonpackager.vcs import get_suitable_vcs
 
 class ReleaseCommand(Command):
     name = "release"
     summary = "Perform a release"
+    
+    def run(self, options, args):
+        self.vcs = get_suitable_vcs()
+        import pdb; pdb.set_trace();
     
     def version_bump(version, type="bug"):
         """
