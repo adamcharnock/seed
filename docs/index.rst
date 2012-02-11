@@ -6,19 +6,49 @@
 Welcome to Python Packager's documentation!
 ===========================================
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
    
-   todo
+
+Installation
+============
+
+::
+
+    pip install python-packager
+
+Getting started
+===============
+
+If you need an entirely fresh package then you can do this::
+
+    pythonpackager create
+
+You can also pass a few options to the `create` command. See the help for details::
+
+    pythonpackager help create
 
 
+If you already have a package you can release it using::
 
-Indices and tables
-==================
+    pythonpackager release
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+Again, options are documented here::
 
+    pythonpackager help release
+
+**Notes on releasing:** The release process makes a bunch of assumptions 
+about your project. If you created your project using the `create` command, 
+then you are probably fine, but you may need to do a little hacking otherwise.
+
+Source
+======
+
+Is on GitHub_.
+
+The name
+========
+
+Sucks, any suggestions?
+
+.. _GitHub: https://github.com/adamcharnock/python-packager

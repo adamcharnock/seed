@@ -8,10 +8,10 @@ Todo & planning
   
 * ``release`` command
 
-  * Version bump
-  * Update changelog from git
-  * Do the commit (with user interaction?)
-  * Tag it
-  * Update PyPi
+  * Version bump (done)
+  * Update changelog from git (done)
+  * Do the commit (done)
+  * Tag it (done)
+  * Update PyPi (done)
 
 .. _default directory structure: http://guide.python-distribute.org/creation.html#arranging-your-file-and-directory-structure
