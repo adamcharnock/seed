@@ -8,7 +8,7 @@ from distutils.version import LooseVersion
 
 from seed.commands import Command
 from seed.utilities import run_command
-from seed.exceptions import ShellCommandError
+from seed.exceptions import ShellCommandError, CommandError
 from seed.vcs import get_suitable_vcs
 
 class ReleaseCommand(Command):
@@ -74,6 +74,10 @@ class ReleaseCommand(Command):
     def run(self, options, args):
         vcs = get_suitable_vcs()
         previous_version = self.read_version()
+        
+        if not previous_version:
+            raise CommandError("Could not determine version. Make sure your %s/__init__.py file contains '__version__ = \"1.2.3\"'" % self.package_name)
+        
         if options.initial:
             # We don't increment the version number for the initial commit
             next_version = previous_version
@@ -163,8 +167,12 @@ class ReleaseCommand(Command):
             # version is in there somewhere
             contents = f.read(1024)
         
-        version = re.search(r"__version__ = ['\"](.*?)['\"]", contents).group(1)
-        return version
+        matches = re.search(r"__version__\s+=\s+['\"](.*?)['\"]", contents)
+        
+        if matches:
+            return matches.group(1)
+        else:
+            return None
     
     def write_version(self, version):
         # This will captute STDOUT and overwrite the file
