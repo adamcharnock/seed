@@ -12,16 +12,6 @@ class CreateCommand(Command):
     def __init__(self):
         super(CreateCommand, self).__init__()
         
-        default_name = path(os.getcwd()).name.lower().replace("-", "")
-        
-        self.parser.add_option(
-            '-n', '--name',
-            dest='package_name',
-            action='store',
-            default=default_name,
-            type='str',
-            help='The package name. Will default to the current directory name, lower cased, and with dashes stripped.')
-        
         self.parser.add_option(
             '-r', '--release',
             dest='version',

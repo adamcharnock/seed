@@ -54,7 +54,7 @@ class Command(object):
             action='store',
             default='',
             type='str',
-            help='The package name. Will default to the current directory name, lower cased, and with dashes stripped.')
+            help='The package name. Will try to auto-detect if possible.')
     
     def main(self, args, initial_options):
         options, args = self.parser.parse_args(args)
