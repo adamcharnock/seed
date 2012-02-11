@@ -56,6 +56,11 @@ class CreateCommand(Command):
         
         self.create_dirs(project_dir, package_name)
         self.create_files(project_dir, package_name, version)
+        
+        print "All done!"
+        print "You'll need to make some changes to setup.py (see the comments),"
+        print "and putting something sensible in LICENSE.txt & README.rst "
+        print "is probably a good idea"
     
     def create_dirs(self, project_dir, package_name):
         dirs = [
@@ -142,8 +147,10 @@ setup(
     packages=['%(package_name)s'],
     # Any executable scripts, typically in 'bin'. E.g 'bin/do-something.py'
     scripts=[],
+    # REQUIRED: Your project's URL
     url='',
-    license='LICENSE.txt',
+    # Put your license here. See LICENSE.txt for more information
+    license='',
     description='',
     long_description=open('README.rst').read(),
     # Any requirements here, e.g. "Django >= 1.1.1"

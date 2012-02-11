@@ -84,7 +84,10 @@ class ReleaseCommand(Command):
         else:
             next_version = self.get_next_version(options, package_dir, previous_version)
         
+        print "This release will be version %s" % next_version
+        
         # Running checks
+        print "Running package sanity checks"
         try:
             run_command("python setup.py check")
         except ShellCommandError, e:
@@ -96,6 +99,7 @@ class ReleaseCommand(Command):
         if options.dry_run:
             print "Version would be set to %s" % next_version
         else:
+            print "Version written"
             self.write_version(package_dir, next_version)
         
         # Update the changelog
@@ -106,6 +110,7 @@ class ReleaseCommand(Command):
             else:
                 print "Would have written %d changes to changelog" % len(changes)
         else:
+            print "Updating changelog"
             if options.initial:
                 self.write_changelog(project_dir, [], "%s (first version)" % next_version)
             else:
@@ -118,18 +123,22 @@ class ReleaseCommand(Command):
         if options.dry_run:
             print "Would have committed changes to: %s" % ", ".join(commit_files)
         else:
+            print "Committing changes"
             vcs.commit("Version bump to %s and updating CHANGES.txt" % next_version, commit_files)
         
         # Now do the tag
         if options.dry_run:
             print "Would have created a tag for version %s" % next_version
         else:
+            print "Tagging new version"
             vcs.tag(next_version)
         
         # Now register the package (if this is the initial version)
         if options.dry_run:
             print "Would have updated PyPi"
         else:
+            print "Uploading to PyPi"
+            print "(This may take a while, grab a cuppa. You've done a great job!)"
             if options.initial:
                 run_command("python setup.py register sdist upload")
             else:
