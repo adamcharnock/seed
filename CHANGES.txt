@@ -4,6 +4,12 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.4, Sat 11 Feb 2012
+===============================
+
+b55f333476	Tweaks to the --push command (Adam Charnock)
+
+
 Version 0.2.3, Sat 11 Feb 2012
 ===============================
 
