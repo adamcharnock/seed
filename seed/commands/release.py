@@ -34,7 +34,7 @@ class ReleaseCommand(Command):
             dest='bug',
             action='store_true',
             default=False,
-            help='This is a minor release (i.e. 0.0.1)')
+            help='This is a minor release (i.e. 0.0.1). This is the default.')
         
         self.parser.add_option(
             '--minor',
