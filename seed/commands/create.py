@@ -2,8 +2,8 @@ import os
 import os.path
 from path import path
 
-from pythonpackager.exceptions import CommandError
-from pythonpackager.commands import Command
+from seed.exceptions import CommandError
+from seed.commands import Command
 
 class CreateCommand(Command):
     name = "create"

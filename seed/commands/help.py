@@ -1,7 +1,7 @@
-from pythonpackager.commands import (Command, command_dict,
+from seed.commands import (Command, command_dict,
                                      load_all_commands)
-from pythonpackager.exceptions import CommandError
-from pythonpackager.baseparser import parser
+from seed.exceptions import CommandError
+from seed.baseparser import parser
 
 
 class HelpCommand(Command):

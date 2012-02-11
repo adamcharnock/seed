@@ -1,8 +1,8 @@
 import re
 
-from pythonpackager.utilities import run_command
-from pythonpackager.vcs.git import GitVcs
-from pythonpackager.exceptions import VcsCommandError
+from seed.utilities import run_command
+from seed.vcs.git import GitVcs
+from seed.exceptions import VcsCommandError
 
 GH_DOWNLOAD_URL = "http://github.com/%s/%s/tarball/%s"
 

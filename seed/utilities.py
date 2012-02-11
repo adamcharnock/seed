@@ -1,5 +1,5 @@
 from subprocess import PIPE, STDOUT, Popen
-from pythonpackager.exceptions import ShellCommandError
+from seed.exceptions import ShellCommandError
 
 def run_command(command):
     p = Popen(command, shell=True, stdout=PIPE, stderr=STDOUT, close_fds=True)

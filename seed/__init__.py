@@ -2,14 +2,14 @@ import sys
 
 from pip.backwardcompat import walk_packages
 
-from pythonpackager.baseparser import parser
-from pythonpackager.commands import load_command, command_dict
+from seed.baseparser import parser
+from seed.commands import load_command, command_dict
 
 __version__ = "0.1.2"
 
 def version_control():
     # Import all the version control support modules:
-    from pythonpackager import vcs
+    from seed import vcs
     for importer, modname, ispkg in \
             walk_packages(path=vcs.__path__, prefix=vcs.__name__+'.'):
         __import__(modname)

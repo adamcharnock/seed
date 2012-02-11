@@ -5,7 +5,7 @@ from pip.backwardcompat import walk_packages
 vcs_dict = {}
 
 def load_vcs(name):
-    full_name = 'pythonpackager.vcs.%s' % name
+    full_name = 'seed.vcs.%s' % name
     if full_name in sys.modules:
         return
     try:
@@ -18,7 +18,7 @@ def load_all_vcs():
         load_vcs(name)
 
 def vcs_names():
-    from pythonpackager import vcs
+    from seed import vcs
     names = set((pkg[1] for pkg in walk_packages(path=vcs.__path__)))
     return list(names)
 

@@ -6,10 +6,10 @@ from datetime import datetime
 
 from distutils.version import LooseVersion
 
-from pythonpackager.commands import Command
-from pythonpackager.utilities import run_command
-from pythonpackager.exceptions import ShellCommandError
-from pythonpackager.vcs import get_suitable_vcs
+from seed.commands import Command
+from seed.utilities import run_command
+from seed.exceptions import ShellCommandError
+from seed.vcs import get_suitable_vcs
 
 class ReleaseCommand(Command):
     name = "release"

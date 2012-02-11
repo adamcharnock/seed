@@ -1,4 +1,4 @@
-Change-log for python-packager.
+Change-log for Seed.
 
 This file will be added to as part of each release
 

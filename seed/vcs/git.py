@@ -1,9 +1,9 @@
 import re
 from pipes import quote
 
-from pythonpackager.vcs import BaseVcs
-from pythonpackager.utilities import run_command
-from pythonpackager.exceptions import ShellCommandError
+from seed.vcs import BaseVcs
+from seed.utilities import run_command
+from seed.exceptions import ShellCommandError
 
 class GitVcs(BaseVcs):
     name = "git"

@@ -1,16 +1,16 @@
-.. Python Packager documentation master file, created by
+.. Seed documentation master file, created by
    sphinx-quickstart on Fri Feb 10 12:11:25 2012.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Python Packager's documentation!
+Welcome to Seed's documentation!
 ===========================================
 
 .. toctree::
    :maxdepth: 2
    
 
-Python Packager is an experiment in making releasing PyPi packages trivially 
+Seed is an experiment in making releasing PyPi packages trivially 
 easy. For example, the `release` command will:
 
 * Increment the version number in `__init__.py`
@@ -27,27 +27,27 @@ Installation
 
 ::
 
-    pip install python-packager
+    pip install seed
 
 Getting started
 ===============
 
 If you need an entirely fresh package then you can do this::
 
-    pythonpackager create
+    seed create
 
 You can also pass a few options to the `create` command. See the help for details::
 
-    pythonpackager help create
+    seed help create
 
 
 If you already have a package you can release it using::
 
-    pythonpackager release
+    seed release
 
 Again, options are documented here::
 
-    pythonpackager help release
+    seed help release
 
 **Notes on releasing:** The release process makes a bunch of assumptions 
 about your project. If you created your project using the `create` command, 
@@ -56,17 +56,12 @@ then you are probably fine, but you may need to do a little hacking otherwise.
 Source
 ======
 
-Is on `GitHub <https://github.com/adamcharnock/python-packager>`_.
-
-The name
-========
-
-Sucks, any suggestions?
+Is on `GitHub <https://github.com/adamcharnock/seed>`_.
 
 Other notes & about the author
 ==============================
 
-The structure of Python Packager is heavily based on that of `pip <https://github.com/pypa/pip/>`_. 
+The structure of Seed is heavily based on that of `pip <https://github.com/pypa/pip/>`_. 
 It is still a bit rough around the edges, but the basic stuff is there.
 
 I find myself managing a lot of packages as I always have a number of Django projects on the go 

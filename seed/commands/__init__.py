@@ -3,12 +3,12 @@ import sys
 
 from pip.backwardcompat import walk_packages
 
-from pythonpackager.baseparser import parser
+from seed.baseparser import parser
 
 command_dict = {}
 
 def load_command(name):
-    full_name = 'pythonpackager.commands.%s' % name
+    full_name = 'seed.commands.%s' % name
     if full_name in sys.modules:
         return
     try:
@@ -21,7 +21,7 @@ def load_all_commands():
         load_command(name)
 
 def command_names():
-    from pythonpackager import commands
+    from seed import commands
     names = set((pkg[1] for pkg in walk_packages(path=commands.__path__)))
     return list(names)
 
