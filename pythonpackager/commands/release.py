@@ -7,6 +7,8 @@ from datetime import datetime
 from distutils.version import LooseVersion
 
 from pythonpackager.commands import Command
+from pythonpackager.utilities import run_command
+from pythonpackager.exceptions import ShellCommandError
 from pythonpackager.vcs import get_suitable_vcs
 
 class ReleaseCommand(Command):
@@ -62,6 +64,12 @@ class ReleaseCommand(Command):
             default=False,
             help="Don't actually do anything, just show what will happen")
         
+        self.parser.add_option(
+            '-i', '--initial',
+            dest='initial',
+            action='store_true',
+            default=False,
+            help="This is the first release. Register this package with PyPi, don't increment the version number, don't write changes to the changelog")
     
     def run(self, options, args):
         project_dir = path(os.getcwd())
@@ -70,26 +78,64 @@ class ReleaseCommand(Command):
         
         vcs = get_suitable_vcs()
         previous_version = self.read_version(package_dir)
-        next_version = self.get_next_version(options, package_dir, previous_version)
+        if options.initial:
+            # We don't increment the version number for the initial commit
+            next_version = previous_version
+        else:
+            next_version = self.get_next_version(options, package_dir, previous_version)
+        
+        # Running checks
+        try:
+            run_command("python setup.py check")
+        except ShellCommandError, e:
+            print "Checks failed. Messages were:\n%s" % e.output
+            sys.exit(1)
+        
+        # Update the version number
         
         if options.dry_run:
-            print "Version would be bumped to %s" % next_version
+            print "Version would be set to %s" % next_version
         else:
             self.write_version(package_dir, next_version)
         
+        # Update the changelog
+        
         changes = vcs.get_changes(previous_version)
         if options.dry_run:
-            print "Would have written %d changes to changelog" % len(changes)
+            if options.initial:
+                print "Would have written the initial version to the changelog"
+            else:
+                print "Would have written %d changes to changelog" % len(changes)
         else:
-            self.write_changelog(project_dir, changes, next_version)
+            if options.initial:
+                self.write_changelog(project_dir, changes, "%s (first version)" % next_version)
+            else:
+                self.write_changelog(project_dir, changes, next_version)
         
-        # Now do the commit
+        # Commit the changes we have made
+        
+        commit_files = [project_dir / "CHANGES.txt", package_dir / "__init__.py"]
+        if options.dry_run:
+            print "Would have committed changes to: %s" % ", ".join(commit_files)
+        else:
+            vcs.commit("Version bump to %s and updating CHANGES.txt" % next_version, commit_files)
         
         # Now do the tag
+        if options.dry_run:
+            print "Would have created a tag for version %s" % next_version
+        else:
+            vcs.tag(next_version)
         
-        # Now do the push
+        # Now register the package (if this is the initial version)
+        if options.dry_run:
+            print "Would have updated PyPi"
+        else:
+            if options.initial:
+                run_command("python setup.py register sdist upload")
+            else:
+                run_command("python setup.py sdist upload")
         
-        # Now update pypi
+        print "All done! (we have made changes, but not pushed)"
     
     def get_next_version(self, options, package_dir, previous_version):
         if options.version:
@@ -119,7 +165,7 @@ class ReleaseCommand(Command):
             else:
                 print line,
     
-    def write_changelog(self, project_dir, changes, next_vesion):
+    def write_changelog(self, project_dir, changes, next_version):
         # This will captute STDOUT and overwrite the file
         written = False
         for line in fileinput.input(project_dir / "CHANGES.txt", inplace=1):
@@ -130,7 +176,7 @@ class ReleaseCommand(Command):
                 # Write our new log messages
                 
                 date = datetime.now().strftime("%a %d %b %Y")
-                header = "\nVersion %s, %s" % (next_vesion, date)
+                header = "\nVersion %s, %s" % (next_version, date)
                 print "%s\n%s\n\n" % (header, "=" * len(header)),
                 for commit, author, message in changes:
                     print "%s\t%s (%s)" % (commit, message, author)

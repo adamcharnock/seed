@@ -8,7 +8,7 @@ setup(
     author_email='adam@playnice.ly',
     packages=['pythonpackager', 'pythonpackager.commands', 'pythonpackager.vcs'],
     scripts=[],
-    url='',
+    url='https://github.com/adamcharnock/python-packager',
     license='LICENSE.txt',
     description='',
     long_description=open('README.rst').read(),

@@ -1,4 +1,6 @@
-build
+build/
 docs/_build
 .gitignore
 *.pyc
+dist/
+MANIFEST
