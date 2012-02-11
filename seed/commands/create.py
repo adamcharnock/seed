@@ -139,6 +139,7 @@ setup(
     url='',
     # Put your license here. See LICENSE.txt for more information
     license='',
+    # Put a nice one-liner description here
     description='',
     long_description=open('README.rst').read(),
     # Any requirements here, e.g. "Django >= 1.1.1"
