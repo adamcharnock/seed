@@ -5,7 +5,7 @@ from pip.backwardcompat import walk_packages
 from seed.baseparser import parser
 from seed.commands import load_command, command_dict
 
-__version__ = "0.2.4"
+__version__ = "0.2.5"
 
 def version_control():
     # Import all the version control support modules:

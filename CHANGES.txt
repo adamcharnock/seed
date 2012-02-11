@@ -4,6 +4,13 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.5, Sat 11 Feb 2012
+===============================
+
+7bc3027c41	Adding classifiers to setup.py (Adam Charnock)
+df9cc9f6e5	Tweak to message display (Adam Charnock)
+
+
 Version 0.2.4, Sat 11 Feb 2012
 ===============================
 
