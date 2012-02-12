@@ -9,7 +9,7 @@ setup(
     packages=['seed', 'seed.commands', 'seed.vcs'],
     scripts=[],
     url='https://github.com/adamcharnock/seed',
-    license='LICENSE.txt',
+    license='MIT',
     description='A utility for easily creating and releasing Python packages',
     long_description=open('README.rst').read(),
     entry_points=dict(console_scripts=['seed=seed:main']),
