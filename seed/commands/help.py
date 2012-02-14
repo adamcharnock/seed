@@ -28,5 +28,10 @@ class HelpCommand(Command):
                 continue
             print('  %s: %s' % (command.name, command.summary))
         return
+    
+    def determine_paths(self, *args, **kwargs):
+        # Disable this functionality specially for the help command as 
+        # it should be available anywhere.
+        pass
 
 HelpCommand()
