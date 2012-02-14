@@ -4,6 +4,12 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.7, Tue 14 Feb 2012
+===============================
+
+28fa2c522e	Including README.rst in manifest and making long_description parsing more robust (Adam Charnock)
+
+
 Version 0.2.6, Tue 14 Feb 2012
 ===============================
 
