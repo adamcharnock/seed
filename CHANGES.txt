@@ -4,6 +4,14 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.6, Tue 14 Feb 2012
+===============================
+
+8cd915426b	'help' command can now be used outside of a project directory (Adam Charnock)
+d2dfb90d94	Refactoring __init__.py code into run.py (Adam Charnock)
+723083b7ef	Setting the license setup.py param to MIT (Adam Charnock)
+
+
 Version 0.2.5, Sat 11 Feb 2012
 ===============================
 
