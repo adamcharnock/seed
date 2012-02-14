@@ -4,6 +4,12 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.8, Tue 14 Feb 2012
+===============================
+
+b3cd1559c3	Adding shebang to the start of setup.py and the template setup.py (Adam Charnock)
+
+
 Version 0.2.7, Tue 14 Feb 2012
 ===============================
 
