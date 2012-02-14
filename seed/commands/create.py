@@ -117,13 +117,15 @@ http://www.opensource.org/licenses/category
 """
 
 TEMPLATE_MANIFEST = """include *.txt
+include *.rst
 recursive-include docs *"""
 
 TEMPLATE_README = """Auto generated readme file for %(project_name)s.
 
 Put something informative here"""
 
-TEMPLATE_SETUP = """from distutils.core import setup
+TEMPLATE_SETUP = """from os.path import exists
+from distutils.core import setup
 from %(package_name)s import __version__
 
 setup(
@@ -142,7 +144,7 @@ setup(
     license='',
     # Put a nice one-liner description here
     description='',
-    long_description=open('README.rst').read(),
+    long_description=open('README.rst').read() if exists("README.rst") else "",
     # Any requirements here, e.g. "Django >= 1.1.1"
     install_requires=[
         

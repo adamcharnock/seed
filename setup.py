@@ -1,3 +1,4 @@
+from os.path import exists
 from distutils.core import setup
 from seed import __version__
 
@@ -11,7 +12,7 @@ setup(
     url='https://github.com/adamcharnock/seed',
     license='MIT',
     description='A utility for easily creating and releasing Python packages',
-    long_description=open('README.rst').read(),
+    long_description=open('README.rst').read() if exists("README.rst") else "",
     entry_points=dict(console_scripts=['seed=seed.run:main']),
     install_requires=[
         "path.py>=2.2.2",
