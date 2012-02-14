@@ -150,5 +150,9 @@ setup(
 )
 """
 
-TEMPLATE_INIT = """__version__ = '%(version)s'
+TEMPLATE_INIT = """
+# It must be possible to import this file with 
+# none of the package's dependencies installed
+
+__version__ = '%(version)s'
 """

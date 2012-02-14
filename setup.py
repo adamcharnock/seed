@@ -12,7 +12,7 @@ setup(
     license='MIT',
     description='A utility for easily creating and releasing Python packages',
     long_description=open('README.rst').read(),
-    entry_points=dict(console_scripts=['seed=seed:main']),
+    entry_points=dict(console_scripts=['seed=seed.run:main']),
     install_requires=[
         "path.py>=2.2.2",
     ],
