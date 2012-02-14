@@ -124,7 +124,9 @@ TEMPLATE_README = """Auto generated readme file for %(project_name)s.
 
 Put something informative here"""
 
-TEMPLATE_SETUP = """from os.path import exists
+TEMPLATE_SETUP = """#!/usr/bin/env python
+
+from os.path import exists
 from distutils.core import setup
 from %(package_name)s import __version__
 
