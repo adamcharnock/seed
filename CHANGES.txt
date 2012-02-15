@@ -4,6 +4,13 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.10, Wed 15 Feb 2012
+================================
+
+82a6487588	Seed now parses setup.py to determine the current package name (Adam Charnock)
+7dde4266dd	Making setup.py executable (Adam Charnock)
+
+
 Version 0.2.9, Wed 15 Feb 2012
 ===============================
 
