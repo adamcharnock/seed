@@ -4,6 +4,12 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.9, Wed 15 Feb 2012
+===============================
+
+bfe14b3cbe	setuptools will now be used where available (Adam Charnock)
+
+
 Version 0.2.8, Tue 14 Feb 2012
 ===============================
 
