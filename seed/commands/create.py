@@ -127,7 +127,11 @@ Put something informative here"""
 TEMPLATE_SETUP = """#!/usr/bin/env python
 
 from os.path import exists
-from distutils.core import setup
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+
 from %(package_name)s import __version__
 
 setup(

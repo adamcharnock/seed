@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 
 from os.path import exists
-from distutils.core import setup
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+
 from seed import __version__
 
 setup(
