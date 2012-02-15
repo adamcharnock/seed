@@ -2,6 +2,7 @@ import optparse
 import sys
 import difflib
 import os
+from distutils.core import run_setup
 
 from path import path
 from pip.backwardcompat import walk_packages
@@ -67,6 +68,18 @@ class Command(object):
         
         self.run(options, args)
     
+    def get_distribution(self):
+        setup_path = self.project_dir / "setup.py"
+        if not os.path.exists(setup_path):
+            return None
+        
+        try:
+            distribution = run_setup(setup_path, stop_after="init")
+        except Exception, e:
+            print "Warning: failed to load distribution information from setup.py. Error was: %s" % e
+        
+        return distribution
+    
     def determine_paths(self, package_name=None):
         """Determine paths automatically and a little intelligently"""
         
@@ -84,15 +97,21 @@ class Command(object):
         
         if package_name:
             self.package_name = package_name
-        else:   
+        else:
             # Try and work out the package name
-            possibles = [n for n in os.listdir(package_search_dir) if os.path.isdir(package_search_dir / n)]
-            close = difflib.get_close_matches(self.project_name, possibles, n=1, cutoff=0.8)
+            # First we try and parse setup.py, then we try and guess a directory
+            distribution = self.get_distribution()
+            if distribution:
+                self.package_name = distribution.get_name()
+            else:
+                # TODO: Consider ditching this as the 'distribution' code above should suffice
+                possibles = [n for n in os.listdir(package_search_dir) if os.path.isdir(package_search_dir / n)]
+                close = difflib.get_close_matches(self.project_name, possibles, n=1, cutoff=0.8)
             
-            if not close:
-                raise CommandError("Could not guess the package name. Specify it using --name.")
+                if not close:
+                    raise CommandError("Could not guess the package name. Specify it using --name.")
             
-            self.package_name = close[0]
+                self.package_name = close[0]
         
         self.package_dir = package_search_dir / self.package_name
             
