@@ -77,6 +77,7 @@ class Command(object):
             distribution = run_setup(setup_path, stop_after="init")
         except Exception, e:
             print "Warning: failed to load distribution information from setup.py. Error was: %s" % e
+            return None
         
         return distribution
     
@@ -86,7 +87,15 @@ class Command(object):
         # Give preference to the environment variable here as it will not 
         # derefrence sym links
         self.project_dir = path(os.getenv('PWD') or os.getcwd())
-        self.project_name = self.project_dir.name
+        
+        # Try and work out the project name
+        distribution = self.get_distribution()
+        if distribution:
+            # Get name from setup.py
+            self.project_name = distribution.get_name()
+        else:
+            # ...failing that, use the current directory name
+            self.project_name = self.project_dir.name
         
         # Descend into the 'src' directory to find the package 
         # if necessary
@@ -95,26 +104,33 @@ class Command(object):
         else:
             package_search_dir = self.project_dir
         
-        if package_name:
-            self.package_name = package_name
-        else:
-            # Try and work out the package name
-            # First we try and parse setup.py, then we try and guess a directory
-            distribution = self.get_distribution()
-            if distribution:
-                self.package_name = distribution.get_name()
-            else:
-                # TODO: Consider ditching this as the 'distribution' code above should suffice
+        if not package_name:
+            # Lets try and work out the package_name from the project_name
+            package_name = self.project_name.replace("-", "_")
+            
+            # Now do some fuzzy matching
+            def get_matches(name):
                 possibles = [n for n in os.listdir(package_search_dir) if os.path.isdir(package_search_dir / n)]
-                close = difflib.get_close_matches(self.project_name, possibles, n=1, cutoff=0.8)
+                return difflib.get_close_matches(name, possibles, n=1, cutoff=0.8)
             
-                if not close:
-                    raise CommandError("Could not guess the package name. Specify it using --name.")
+            close = get_matches(package_name)
             
-                self.package_name = close[0]
+            # If no matches, try removing the first part of the package name
+            # (e.g. django-guardian becomes guardian)
+            if not close and "_" in package_name:
+                package_name = "_".join(package_name.split("_")[1:])
+                close = get_matches(package_name)
+            
+            if not close:
+                raise CommandError("Could not guess the package name. Specify it using --name.")
         
-        self.package_dir = package_search_dir / self.package_name
-            
+            package_name = close[0]
+        
+        self.package_name = package_name
+        self.package_dir = package_search_dir / package_name
+        
+        if not os.path.exists(self.package_dir):
+            raise CommandError("Package directory did not exist at %s. Perhaps specify it using --name" % self.package_dir)
         
     
 
