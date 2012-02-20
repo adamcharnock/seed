@@ -163,7 +163,7 @@ class ReleaseCommand(Command):
         print "All done!"
         if not options.dry_run and not options.push:
             print "We have made changes, but not pushed. Git users should probably do: "
-            print "    git push --tags"
+            print "    git push && git push --tags"
     
     def get_next_version(self, options, previous_version):
         if options.version:
