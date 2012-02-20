@@ -4,6 +4,13 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.11, Mon 20 Feb 2012
+================================
+
+c9abe94ab5	Correction to git push message (Adam Charnock)
+7109f66f1b	Fix to error reporting and package name detection (Adam Charnock)
+
+
 Version 0.2.10, Wed 15 Feb 2012
 ================================
 
