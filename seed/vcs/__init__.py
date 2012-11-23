@@ -1,6 +1,6 @@
 import sys
 
-from pip.backwardcompat import walk_packages
+from pkgutil import walk_packages
 
 vcs_dict = {}
 

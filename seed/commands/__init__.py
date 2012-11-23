@@ -5,7 +5,7 @@ import os
 from distutils.core import run_setup
 
 from path import path
-from pip.backwardcompat import walk_packages
+from pkgutil import walk_packages
 
 from seed.baseparser import parser
 from seed.exceptions import CommandError
