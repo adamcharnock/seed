@@ -4,6 +4,14 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.2.12, Fri 23 Nov 2012
+================================
+
+0abf57942b	Checking that a user's .pypirc file exists (Adam Charnock)
+76e9e3b8b1	Fixing import (Adam Charnock)
+5bb3d32ab5	Fixed; skipped multi-line commits in CHANGES.txt (Adam J. Gamble)
+
+
 Version 0.2.11, Mon 20 Feb 2012
 ================================
 
