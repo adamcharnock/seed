@@ -102,6 +102,14 @@ class ReleaseCommand(Command):
             print "Checks on setup.py failed. Messages were:\n%s" % "\n".join(warnings)
             sys.exit(1)
         
+        # Checking pypi login details are in place
+        print "Checking we have our PyPi login details in place"
+        if not os.path.exists(os.path.expanduser("~/.pypirc")):
+            print "Could not find your ~/.pypirc file. See http://seed.readthedocs.org/en/latest/#pypi-registration for help."
+            sys.exit(1)
+        else:
+            print "You have a ~/.pypirc file. Assuming the details in there are correct"
+
         # Update the version number
         
         if options.dry_run:
