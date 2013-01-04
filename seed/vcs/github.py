@@ -25,8 +25,10 @@ class GitHubVcs(GitVcs):
         output = run_command("git config --get-regexp 'remote\..*\.url'")
         urls = {}
         for line in output.split("\n"):
-            remote_name, url = re.match(r'remote\.(.*)\.url\s+(.*github\.com.*)', line).groups()
-            urls[remote_name] = url
+            matches = re.match(r'remote\.(.*)\.url\s+(.*github\.com.*)', line)
+            if matches:
+                remote_name, url = matches.groups()
+                urls[remote_name] = url
         
         if "origin" in urls:
             url = urls["origin"]
