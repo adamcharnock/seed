@@ -21,26 +21,19 @@ class CreateCommand(Command):
             help='The initial release version. Default is 0.1.0')
         
         self.parser.add_option(
-            '-f', '--force',
-            dest='force',
-            action='store_true',
-            default=False,
-            help='Force creation even if current directory is not empty.')
-        
-        self.parser.add_option(
             '-d', '--dry-run',
             dest='dry_run',
             action='store_true',
             default=False,
             help="Don't actually create anything, just show what will be created")
+
+    def determine_paths(self, package_name=None, create_package_dir=False):
+        return super(CreateCommand, self).determine_paths(package_name=package_name, create_package_dir=True)
     
     def run(self, options, args):
         version = options.version
         
         self.dry_run = options.dry_run
-        
-        if not options.force and os.listdir(self.project_dir):
-            raise CommandError("Project directory %s is not empty. Use -f for force.")
         
         self.create_dirs()
         self.create_files(version)

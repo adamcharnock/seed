@@ -81,7 +81,7 @@ class Command(object):
         
         return distribution
     
-    def determine_paths(self, package_name=None):
+    def determine_paths(self, package_name=None, create_package_dir=False):
         """Determine paths automatically and a little intelligently"""
         
         # Give preference to the environment variable here as it will not 
@@ -118,13 +118,18 @@ class Command(object):
             # If no matches, try removing the first part of the package name
             # (e.g. django-guardian becomes guardian)
             if not close and "_" in package_name:
-                package_name = "_".join(package_name.split("_")[1:])
-                close = get_matches(package_name)
+                short_package_name = "_".join(package_name.split("_")[1:])
+                close = get_matches(short_package_name)
             
             if not close:
-                raise CommandError("Could not guess the package name. Specify it using --name.")
-        
-            package_name = close[0]
+                if create_package_dir:
+                    package_dir = package_search_dir / package_name
+                    print "Creating package directory at %s" % package_dir
+                    os.mkdir(package_dir)
+                else:
+                    raise CommandError("Could not guess the package name. Specify it using --name.")
+            else:
+                package_name = close[0]
         
         self.package_name = package_name
         self.package_dir = package_search_dir / package_name
