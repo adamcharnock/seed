@@ -4,6 +4,13 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.3.0, Sun 04 Aug 2013
+===============================
+
+9f9ff1393b	Now using setuptools exclusively (Adam Charnock)
+4c1de5dd85	dont raise error when regex finds a non-github repository (Adam Greenhall)
+
+
 Version 0.2.12, Fri 23 Nov 2012
 ================================
 
