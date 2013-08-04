@@ -4,6 +4,12 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.3.1, Sun 04 Aug 2013
+===============================
+
+ffc60e1e32	Package directory creation is now less cautious but more useful (Adam Charnock)
+
+
 Version 0.3.0, Sun 04 Aug 2013
 ===============================
 
