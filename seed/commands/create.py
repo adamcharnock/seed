@@ -127,10 +127,7 @@ Put something informative here"""
 TEMPLATE_SETUP = """#!/usr/bin/env python
 
 from os.path import exists
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup, find_packages
 
 from %(package_name)s import __version__
 
@@ -141,7 +138,7 @@ setup(
     author='',
     author_email='',
     # If you had %(package_name)s.tests, you would also include that in this list
-    packages=['%(package_name)s'],
+    packages=find_packages(),
     # Any executable scripts, typically in 'bin'. E.g 'bin/do-something.py'
     scripts=[],
     # REQUIRED: Your project's URL

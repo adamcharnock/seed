@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 
 from os.path import exists
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup, find_packages
 
 from seed import __version__
 
@@ -13,7 +10,7 @@ setup(
     version=__version__,
     author='Adam Charnock',
     author_email='adam@playnice.ly',
-    packages=['seed', 'seed.commands', 'seed.vcs'],
+    packages=find_packages(),
     scripts=[],
     url='https://github.com/adamcharnock/seed',
     license='MIT',
