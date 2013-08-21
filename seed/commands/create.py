@@ -136,6 +136,15 @@ Usage
 
 *Usage instructions here*
 
+Credits
+-------
+
+*Any credits here*
+
+%(project_name)s is packaged using seed_.
+
+.. _seed: https://github.com/adamcharnock/seed/
+
 """
 
 TEMPLATE_SETUP = """#!/usr/bin/env python
