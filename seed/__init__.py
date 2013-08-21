@@ -1,4 +1,4 @@
 # It must be possible to import this file with 
 # none of the package's dependencies installed
 
-__version__ = "0.3.2"
+__version__ = "0.3.3"

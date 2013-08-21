@@ -4,6 +4,12 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.3.3, Wed 21 Aug 2013
+===============================
+
+77e06dd495	Adding 'credits' section to readme template (Adam Charnock)
+
+
 Version 0.3.2, Wed 21 Aug 2013
 ===============================
 
