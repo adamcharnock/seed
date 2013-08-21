@@ -4,6 +4,13 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.3.2, Wed 21 Aug 2013
+===============================
+
+b7778f5679	Updating readme template (Adam Charnock)
+01eab1a975	Adding badges to readme (Adam Charnock)
+
+
 Version 0.3.1, Sun 04 Aug 2013
 ===============================
 
