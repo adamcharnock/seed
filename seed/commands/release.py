@@ -77,12 +77,19 @@ class ReleaseCommand(Command):
             action='store_true',
             default=False,
             help="Push changes when complete (for distributed VCS only)")
+
+        self.parser.add_option(
+            '-R', '--no-release',
+            dest='no_release',
+            action='store_true',
+            default=False,
+            help="Do not release to PyPi")
         
     
     def run(self, options, args):
         vcs = get_suitable_vcs()
         previous_version = self.read_version()
-        
+
         if not previous_version:
             raise CommandError("Could not determine version. Make sure your root __init__.py file contains '__version__ = \"1.2.3\"'")
         
@@ -101,14 +108,15 @@ class ReleaseCommand(Command):
         if warnings:
             print "Checks on setup.py failed. Messages were:\n%s" % "\n".join(warnings)
             sys.exit(1)
-        
-        # Checking pypi login details are in place
-        print "Checking we have our PyPi login details in place"
-        if not os.path.exists(os.path.expanduser("~/.pypirc")):
-            print "Could not find your ~/.pypirc file. See http://seed.readthedocs.org/en/latest/#pypi-registration for help."
-            sys.exit(1)
-        else:
-            print "You have a ~/.pypirc file. Assuming the details in there are correct"
+
+        # Checking pypi login details are in place (if we need them)
+        if not options.no_release:
+            print "Checking we have our PyPi login details in place"
+            if not os.path.exists(os.path.expanduser("~/.pypirc")):
+                print "Could not find your ~/.pypirc file. See http://seed.readthedocs.org/en/latest/#pypi-registration for help."
+                sys.exit(1)
+            else:
+                print "You have a ~/.pypirc file. Assuming the details in there are correct"
 
         # Update the version number
         
@@ -158,20 +166,31 @@ class ReleaseCommand(Command):
                 vcs.push()        
         
         # Now register/upload the package
-        if options.dry_run:
-            print "Would have updated PyPi"
-        else:
-            print "Uploading to PyPi"
-            print "(This may take a while, grab a cuppa. You've done a great job!)"
-            if options.initial or options.register:
-                run_command("python setup.py register sdist upload")
+        if options.no_release:
+            if options.dry_run:
+                print "Would build dist but not release to PyPi"
             else:
-                run_command("python setup.py sdist upload")
+                print "Build dist, not releasing to PyPi"
+                run_command("python setup.py sdist")
+        else:
+            if options.dry_run:
+                print "Would have updated PyPi"
+            else:
+                print "Uploading to PyPi"
+                print "(This may take a while, grab a cuppa. You've done a great job!)"
+                if options.initial or options.register:
+                    run_command("python setup.py register sdist upload")
+                else:
+                    run_command("python setup.py sdist upload")
         
         print "All done!"
-        if not options.dry_run and not options.push:
-            print "We have made changes, but not pushed. Git users should probably do: "
-            print "    git push && git push --tags"
+        if not options.dry_run:
+            if not options.push:
+                print "We have made changes, but not pushed. Git users should probably do: "
+                print "    git push && git push --tags"
+            if options.no_release:
+                print "Package was not released (as requested). You can find your package here:"
+                print "    %s" % (self.project_dir / 'dist' / '%s-%s.tar.gz' % (self.project_name, next_version))
     
     def get_next_version(self, options, previous_version):
         if options.version:
@@ -201,7 +220,7 @@ class ReleaseCommand(Command):
         # This will captute STDOUT and overwrite the file
         for line in fileinput.input(self.package_dir / "__init__.py", inplace=1):
             if line.startswith("__version__ = "):
-                print '__version__ = "%s"' % version
+                print "__version__ = '%s'" % version
             else:
                 print line,
     
