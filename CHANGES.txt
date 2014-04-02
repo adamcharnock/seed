@@ -4,6 +4,12 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.3.4, Wed 02 Apr 2014
+===============================
+
+2cbf194f6f	Adding --no-release option to release command (Adam Charnock)
+
+
 Version 0.3.3, Wed 21 Aug 2013
 ===============================
 
