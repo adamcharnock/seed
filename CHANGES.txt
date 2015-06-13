@@ -4,6 +4,24 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.9.0, Sat 13 Jun 2015
+===============================
+
+e6215fdcc3	Removing assertIn() usage as it is not supported in python 2.6 (Adam Charnock)
+fd14393349	Fixing occasional error encountered when running commands (Adam Charnock)
+15d26e4c62	Adding coveralls debug command (Adam Charnock)
+d210a972f8	Limiting coverage to seed package (as is should have been all along) (Adam Charnock)
+0893d9e35f	Updating gitignore to ignore coverage-related files (Adam Charnock)
+882ffd739b	Preventing tmp file cleanup for benefit of coveralls (Adam Charnock)
+ef2faaaf87	Attempt to fix coverage reporting issue (Adam Charnock)
+c564be7a5a	Installed collective.dist in .travis.yml as it is needed by travis' python 2.6 (Adam Charnock)
+e0cb16f553	Updating travis config to setup dummy ~/.pypirc file (Adam Charnock)
+454ed3710c	Updating travis config to setup git (Adam Charnock)
+968fa3ae53	Adding tests & travis config (Adam Charnock)
+5afe5947e2	Package directory no longer gets created during create dry run (Adam Charnock)
+15d23fc0f5	Fixing bug when non-github git repo is present (Adam Charnock)
+
+
 Version 0.4.1, Sat 13 Jun 2015
 ===============================
 
