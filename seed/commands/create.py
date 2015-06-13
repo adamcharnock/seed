@@ -27,8 +27,9 @@ class CreateCommand(Command):
             default=False,
             help="Don't actually create anything, just show what will be created")
 
-    def determine_paths(self, package_name=None, create_package_dir=False):
-        return super(CreateCommand, self).determine_paths(package_name=package_name, create_package_dir=True)
+    def determine_paths(self, package_name=None, create_package_dir=False, dry_run=False):
+        return super(CreateCommand, self).determine_paths(
+            package_name=package_name, create_package_dir=True, dry_run=dry_run)
     
     def run(self, options, args):
         version = options.version

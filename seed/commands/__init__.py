@@ -64,7 +64,7 @@ class Command(object):
         # TODO: Catch exceptions from command.run()
         # TODO: Setup logging in some way
         
-        self.determine_paths(options.package_name)
+        self.determine_paths(options.package_name, dry_run=options.dry_run)
         
         self.run(options, args)
     
@@ -81,7 +81,7 @@ class Command(object):
         
         return distribution
     
-    def determine_paths(self, package_name=None, create_package_dir=False):
+    def determine_paths(self, package_name=None, create_package_dir=False, dry_run=False):
         """Determine paths automatically and a little intelligently"""
         
         # Give preference to the environment variable here as it will not 
@@ -103,7 +103,8 @@ class Command(object):
             package_search_dir = self.project_dir / "src"
         else:
             package_search_dir = self.project_dir
-        
+
+        created_package_dir = False
         if not package_name:
             # Lets try and work out the package_name from the project_name
             package_name = self.project_name.replace("-", "_")
@@ -124,8 +125,13 @@ class Command(object):
             if not close:
                 if create_package_dir:
                     package_dir = package_search_dir / package_name
-                    print("Creating package directory at %s" % package_dir)
-                    os.mkdir(package_dir)
+                    # Gets set to true even during dry run
+                    created_package_dir = True
+                    if not dry_run:
+                        print("Creating package directory at %s" % package_dir)
+                        os.mkdir(package_dir)
+                    else:
+                        print("Would have created package directory at %s" % package_dir)
                 else:
                     raise CommandError("Could not guess the package name. Specify it using --name.")
             else:
@@ -133,8 +139,8 @@ class Command(object):
         
         self.package_name = package_name
         self.package_dir = package_search_dir / package_name
-        
-        if not os.path.exists(self.package_dir):
+
+        if not os.path.exists(self.package_dir) and not created_package_dir:
             raise CommandError("Package directory did not exist at %s. Perhaps specify it using --name" % self.package_dir)
         
     
