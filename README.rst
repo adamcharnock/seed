@@ -1,8 +1,12 @@
-.. image:: https://badge.fury.io/py/seed.png
+.. image:: https://img.shields.io/pypi/v/seed.svg
     :target: https://badge.fury.io/py/seed
 
-.. image:: https://pypip.in/d/seed/badge.png
+.. image:: https://img.shields.io/pypi/dm/seed.svg
     :target: https://pypi.python.org/pypi/seed
+
+.. image:: https://img.shields.io/github/license/adamcharnock/seed.svg
+    :target: https://pypi.python.org/pypi/seed/
+
 
 Documentation
 =============
