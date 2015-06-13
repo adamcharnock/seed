@@ -7,3 +7,4 @@ MANIFEST
 *.egg-info/
 /.idea
 .DS_Store
+.bash_history
