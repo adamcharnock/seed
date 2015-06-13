@@ -10,14 +10,14 @@ class BaseSeedTest(unittest.TestCase):
     def setUp(self):
         container_dir = mkdtemp(suffix=self._testMethodName)
         self.pkg_dir = os.path.join(container_dir, 'testpkg')
-        self._old_cwd = os.getcwd()
+        self.seed_dir = os.getcwd()
         os.mkdir(self.pkg_dir)
         os.chdir(self.pkg_dir)
         os.environ['PWD'] = self.pkg_dir
 
     def tearDown(self):
-        os.chdir(self._old_cwd)
-        os.environ['PWD'] = self._old_cwd
+        os.chdir(self.seed_dir)
+        os.environ['PWD'] = self.seed_dir
         shutil.rmtree(self.pkg_dir)
 
     def create_package(self, *args):
@@ -51,3 +51,16 @@ class BaseSeedTest(unittest.TestCase):
 
         ok = os.system("git show-ref --tags | grep `git log --format='%H' -n 1` | grep 'v{0}'".format(version))
         self.assertEqual(ok, 0, "Latest version not tagged in git")
+
+    def run_with_coverage(self, command):
+        with_coverage_cmd = \
+            "coverage run -p {seed_dir}/seed/run.py {command}".format(
+                seed_dir=self.seed_dir,
+                command=command,
+            )
+        status = os.system(with_coverage_cmd)
+        os.system("cp {pkg_dir}/.coverage.* {seed_dir}".format(
+            pkg_dir=self.pkg_dir,
+            seed_dir=self.seed_dir,
+        ))
+        return status

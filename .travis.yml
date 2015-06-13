@@ -14,6 +14,7 @@ install:
   - "git config --global user.name 'Test User'"
   - 'echo "[server-login]\nusername:testuser\npassword:testpass" > ~/.pypirc'
 script:
-  coverage run --source=seed runtests.py
+  coverage run -p --source=seed runtests.py
 after_success:
-  coveralls
+  - coverage combine
+  - coveralls
