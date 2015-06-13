@@ -18,4 +18,5 @@ script:
   coverage run -p --source=seed runtests.py
 after_success:
   - coverage combine
+  - coveralls debug
   - coveralls
