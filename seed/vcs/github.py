@@ -22,7 +22,7 @@ class GitHubVcs(GitVcs):
     
     def get_user_repo(self):
         # Get all remote urls
-        output = run_command("git config --get-regexp 'remote\..*\.url'")
+        output = run_command("git config --get-regexp 'remote\..*\.url'", ok_statuses=(0, 1))
         urls = {}
         for line in output.split("\n"):
             matches = re.match(r'remote\.(.*)\.url\s+(.*github\.com.*)', line)
