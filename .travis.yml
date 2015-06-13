@@ -12,6 +12,7 @@ install:
   - "pip install pytest coveralls"
   - "git config --global user.email 'user@test.com'"
   - "git config --global user.name 'Test User'"
+  - 'echo "[server-login]\nusername:testuser\npassword:testpass" > ~/.pypirc'
 script:
   coverage run --source=seed runtests.py
 after_success:
