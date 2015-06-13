@@ -4,6 +4,13 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.4.0, Sat 13 Jun 2015
+===============================
+
+e45da284bf	Updating gitignore (Adam Charnock)
+6e06fe82eb	Fixes for python3 support (Adam Charnock)
+
+
 Version 0.3.4, Wed 02 Apr 2014
 ===============================
 
