@@ -18,7 +18,13 @@ class BaseSeedTest(unittest.TestCase):
     def tearDown(self):
         os.chdir(self.seed_dir)
         os.environ['PWD'] = self.seed_dir
-        shutil.rmtree(self.pkg_dir)
+
+        # It is useful to be able to skip cleanup when doing
+        # coverage reporting as some source files are needed to
+        # upload to coveralls.io
+        do_cleanup = not os.path.exists(os.path.join(self.seed_dir, '.nocleanup'))
+        if do_cleanup:
+            shutil.rmtree(self.pkg_dir)
 
     def create_package(self, *args):
         CreateCommand().main(
