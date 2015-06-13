@@ -4,6 +4,14 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.4.1, Sat 13 Jun 2015
+===============================
+
+c591c395e1	Updating readme badges (Adam Charnock)
+14c94e60ab	Updating license file content (Adam Charnock)
+ddcc4a1c0b	Importing future print() function (Adam Charnock)
+
+
 Version 0.4.0, Sat 13 Jun 2015
 ===============================
 
