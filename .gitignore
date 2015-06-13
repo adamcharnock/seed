@@ -8,3 +8,6 @@ MANIFEST
 /.idea
 .DS_Store
 .bash_history
+.coverage*
+.coveralls.yml
+.nocleanup
