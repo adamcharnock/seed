@@ -60,7 +60,7 @@ class BaseSeedTest(unittest.TestCase):
 
     def run_with_coverage(self, command):
         with_coverage_cmd = \
-            "coverage run -p {seed_dir}/seed/run.py {command}".format(
+            "coverage run -p --source=seed {seed_dir}/seed/run.py {command}".format(
                 seed_dir=self.seed_dir,
                 command=command,
             )
