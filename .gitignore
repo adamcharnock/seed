@@ -5,3 +5,5 @@ docs/_build
 dist/
 MANIFEST
 *.egg-info/
+/.idea
+.DS_Store
