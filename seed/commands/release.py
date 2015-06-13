@@ -99,43 +99,43 @@ class ReleaseCommand(Command):
         else:
             next_version = self.get_next_version(options, previous_version)
         
-        print "This release will be version %s" % next_version
+        print("This release will be version %s" % next_version)
         
         # Running checks
-        print "Running package sanity checks on setup.py"
+        print("Running package sanity checks on setup.py")
         output = run_command("python setup.py check")
         warnings = [l.split("check: ")[1] for l in output.split("\n") if "check: " in l]
         if warnings:
-            print "Checks on setup.py failed. Messages were:\n%s" % "\n".join(warnings)
+            print("Checks on setup.py failed. Messages were:\n%s" % "\n".join(warnings))
             sys.exit(1)
 
         # Checking pypi login details are in place (if we need them)
         if not options.no_release:
-            print "Checking we have our PyPi login details in place"
+            print("Checking we have our PyPi login details in place")
             if not os.path.exists(os.path.expanduser("~/.pypirc")):
-                print "Could not find your ~/.pypirc file. See http://seed.readthedocs.org/en/latest/#pypi-registration for help."
+                print("Could not find your ~/.pypirc file. See http://seed.readthedocs.org/en/latest/#pypi-registration for help.")
                 sys.exit(1)
             else:
-                print "You have a ~/.pypirc file. Assuming the details in there are correct"
+                print("You have a ~/.pypirc file. Assuming the details in there are correct")
 
         # Update the version number
         
         if options.dry_run:
-            print "Version would be set to %s" % next_version
+            print("Version would be set to %s" % next_version)
         else:
-            print "Version written"
+            print("Version written")
             self.write_version(next_version)
         
         # Update the changelog
         
         if options.dry_run:
             if options.initial:
-                print "Would have written the initial version to the changelog"
+                print("Would have written the initial version to the changelog")
             else:
                 changes = vcs.get_changes(previous_version)
-                print "Would have written %d changes to changelog" % len(changes)
+                print("Would have written %d changes to changelog" % len(changes))
         else:
-            print "Updating changelog"
+            print("Updating changelog")
             if options.initial:
                 self.write_changelog([], "%s (first version)" % next_version)
             else:
@@ -146,51 +146,51 @@ class ReleaseCommand(Command):
         
         commit_files = [self.project_dir / "CHANGES.txt", self.package_dir / "__init__.py"]
         if options.dry_run:
-            print "Would have committed changes to: %s" % ", ".join(commit_files)
+            print("Would have committed changes to: %s" % ", ".join(commit_files))
         else:
-            print "Committing changes"
+            print("Committing changes")
             vcs.commit("Version bump to %s and updating CHANGES.txt" % next_version, commit_files)
         
         # Now do the tag
         if options.dry_run:
-            print "Would have created a tag for version %s" % next_version
+            print("Would have created a tag for version %s" % next_version)
         else:
-            print "Tagging new version"
+            print("Tagging new version")
             vcs.tag(next_version)
         
         if options.push and hasattr(vcs, "push"):
             if options.dry_run:
-                print "Would have pushed changes"
+                print("Would have pushed changes")
             else:
-                print "Pushing changes"
+                print("Pushing changes")
                 vcs.push()        
         
         # Now register/upload the package
         if options.no_release:
             if options.dry_run:
-                print "Would build dist but not release to PyPi"
+                print("Would build dist but not release to PyPi")
             else:
-                print "Build dist, not releasing to PyPi"
+                print("Build dist, not releasing to PyPi")
                 run_command("python setup.py sdist")
         else:
             if options.dry_run:
-                print "Would have updated PyPi"
+                print("Would have updated PyPi")
             else:
-                print "Uploading to PyPi"
-                print "(This may take a while, grab a cuppa. You've done a great job!)"
+                print("Uploading to PyPi")
+                print("(This may take a while, grab a cuppa. You've done a great job!)")
                 if options.initial or options.register:
                     run_command("python setup.py register sdist upload")
                 else:
                     run_command("python setup.py sdist upload")
         
-        print "All done!"
+        print("All done!")
         if not options.dry_run:
             if not options.push:
-                print "We have made changes, but not pushed. Git users should probably do: "
-                print "    git push && git push --tags"
+                print("We have made changes, but not pushed. Git users should probably do: ")
+                print("    git push && git push --tags")
             if options.no_release:
-                print "Package was not released (as requested). You can find your package here:"
-                print "    %s" % (self.project_dir / 'dist' / '%s-%s.tar.gz' % (self.project_name, next_version))
+                print("Package was not released (as requested). You can find your package here:")
+                print("    %s" % (self.project_dir / 'dist' / '%s-%s.tar.gz' % (self.project_name, next_version)))
     
     def get_next_version(self, options, previous_version):
         if options.version:
@@ -220,9 +220,9 @@ class ReleaseCommand(Command):
         # This will captute STDOUT and overwrite the file
         for line in fileinput.input(self.package_dir / "__init__.py", inplace=1):
             if line.startswith("__version__ = "):
-                print "__version__ = '%s'" % version
+                print("__version__ = '%s'" % version)
             else:
-                print line,
+                print(line, end='')
     
     def write_changelog(self, changes, next_version):
         changelog = self.project_dir / "CHANGES.txt"
@@ -235,17 +235,17 @@ class ReleaseCommand(Command):
         # This will captute STDOUT and overwrite the file
         written = False
         for line in fileinput.input(changelog, inplace=1):
-            print line,
+            print(line, end='')
             if not written and line.startswith("----"):
                 # Write our new log messages
                 written = True
-                print self.make_changelog_text(changes, next_version)
+                print(self.make_changelog_text(changes, next_version))
         
         if not written:
             # Didn't write anything, so lets just append it now
             with open(changelog, "a") as f:
                 f.write("----\n")
-                f.write(self.make_changelog_text())
+                f.write(self.make_changelog_text(changes, next_version))
         
 
     

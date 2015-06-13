@@ -25,7 +25,7 @@ def vcs_names():
 def get_suitable_vcs():
     load_all_vcs()
     possibilities = []
-    for name, vcs in vcs_dict.items():
+    for name, vcs in list(vcs_dict.items()):
         possibilities.append((vcs.get_suitability(), vcs))
     
     best_score, best_vcs = sorted(possibilities, reverse=True)[0]

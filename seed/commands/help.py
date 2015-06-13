@@ -26,7 +26,7 @@ class HelpCommand(Command):
         for command in commands:
             if command.hidden:
                 continue
-            print('  %s: %s' % (command.name, command.summary))
+            print(('  %s: %s' % (command.name, command.summary)))
         return
     
     def determine_paths(self, *args, **kwargs):

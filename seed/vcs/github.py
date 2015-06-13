@@ -13,9 +13,9 @@ class GitHubVcs(GitVcs):
         try:
             self.get_user_repo()
         except VcsCommandError:
-            print "It looks like this is a GitHub project, but we cannot "\
+            print("It looks like this is a GitHub project, but we cannot "\
                   "determine a suitable remote because you have more than "\
-                  "one GitHub remote url and none of them are called 'origin'."
+                  "one GitHub remote url and none of them are called 'origin'.")
             return 0
         
         return 2
@@ -33,7 +33,7 @@ class GitHubVcs(GitVcs):
         if "origin" in urls:
             url = urls["origin"]
         elif len(urls) == 1:
-            url = urls.values()[0]
+            url = list(urls.values())[0]
         else:
             raise VcsCommandError("Could not determine a suitable GitHub remote url. "
                                   "This is because you have more than one GitHub remote url "

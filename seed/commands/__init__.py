@@ -75,8 +75,8 @@ class Command(object):
         
         try:
             distribution = run_setup(setup_path, stop_after="init")
-        except Exception, e:
-            print "Warning: failed to load distribution information from setup.py. Error was: %s" % e
+        except Exception as e:
+            print("Warning: failed to load distribution information from setup.py. Error was: %s" % e)
             return None
         
         return distribution
@@ -124,7 +124,7 @@ class Command(object):
             if not close:
                 if create_package_dir:
                     package_dir = package_search_dir / package_name
-                    print "Creating package directory at %s" % package_dir
+                    print("Creating package directory at %s" % package_dir)
                     os.mkdir(package_dir)
                 else:
                     raise CommandError("Could not guess the package name. Specify it using --name.")

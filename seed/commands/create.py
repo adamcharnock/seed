@@ -38,11 +38,11 @@ class CreateCommand(Command):
         self.create_dirs()
         self.create_files(version)
         
-        print "All done!"
+        print("All done!")
         if not self.dry_run:
-            print "You'll need to make some changes to setup.py (see the comments),"
-            print "and putting something sensible in LICENSE.txt & README.rst "
-            print "is probably a good idea."
+            print("You'll need to make some changes to setup.py (see the comments),")
+            print("and putting something sensible in LICENSE.txt & README.rst ")
+            print("is probably a good idea.")
     
     def create_dirs(self):
         dirs = [
@@ -58,9 +58,9 @@ class CreateCommand(Command):
                 raise CommandError("File %s exists and is not a directory" % dir)
             else:
                 if self.dry_run:
-                    print "Would have created directory %s" % dir
+                    print("Would have created directory %s" % dir)
                 else:
-                    os.mkdir(dir, 0755)
+                    os.mkdir(dir, 0o755)
     
     def create_files(self, version):
         files = [
@@ -85,14 +85,14 @@ class CreateCommand(Command):
                 }
                 
                 if self.dry_run:
-                    print "Would have created file %s" % file
+                    print("Would have created file %s" % file)
                 else:
                     with open(file, "w+") as f:
                         f.write(content)
-                    os.chmod(file, 0644)
+                    os.chmod(file, 0o644)
         
         if not self.dry_run:
-            os.chmod(self.project_dir / "setup.py", 0755)
+            os.chmod(self.project_dir / "setup.py", 0o755)
 
 CreateCommand()
 
