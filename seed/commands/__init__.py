@@ -63,8 +63,7 @@ class Command(object):
         # TODO: Pull options for env or settings file (currently ignoring initial_options)
         # TODO: Catch exceptions from command.run()
         # TODO: Setup logging in some way
-        
-        self.determine_paths(options.package_name, dry_run=options.dry_run)
+        self.determine_paths(options.package_name, dry_run=getattr(options, 'dry_run', False))
         
         self.run(options, args)
     
