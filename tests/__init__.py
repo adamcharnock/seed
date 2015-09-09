@@ -50,10 +50,10 @@ class BaseSeedTest(unittest.TestCase):
         ok = os.system('seed release --initial --no-release')
 
     def assertVersion(self, version):
-        init_py_path = os.path.join(self.pkg_dir, 'testpkg', '__init__.py')
-        with open(init_py_path) as f:
-            init_py = f.read()
-        self.assertTrue("\n__version__ = '{0}'".format(version) in init_py)
+        version_path = os.path.join(self.pkg_dir, 'VERSION')
+        with open(version_path) as f:
+            version = f.read()
+        self.assertTrue(version in version)
 
         ok = os.system("git show-ref --tags | grep `git log --format='%H' -n 1` | grep 'v{0}'".format(version))
         self.assertEqual(ok, 0, "Latest version not tagged in git")
