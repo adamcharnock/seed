@@ -10,7 +10,8 @@ python:
 install:
   - "python setup.py develop"
   - "pip install ."
-  - "pip install pytest coveralls collective.dist 'coverage==4.0a5'"
+  - "pip install pytest coveralls collective.dist"
+  - pip install $(python -c "import sys; print('coverage>4a1' if sys.version_info > (3,3) else 'coverage<4')")
   - "git config --global user.email 'user@test.com'"
   - "git config --global user.name 'Test User'"
   - 'echo "[server-login]\nusername:testuser\npassword:testpass" > ~/.pypirc'
