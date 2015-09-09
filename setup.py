@@ -19,6 +19,7 @@ setup(
     entry_points=dict(console_scripts=['seed=seed.run:main']),
     install_requires=[
         "path.py>=2.2.2",
+        'wheel',
     ],
     classifiers=[
         'Environment :: Console',

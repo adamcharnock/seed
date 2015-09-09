@@ -86,6 +86,13 @@ class ReleaseCommand(Command):
             action='store_true',
             default=False,
             help="Do not release to PyPi")
+
+        self.parser.add_option(
+            '-W', '--no-wheel',
+            dest='no_wheel',
+            action='store_true',
+            default=False,
+            help="Do not release a python wheel")
         
     
     def run(self, options, args):
@@ -168,12 +175,16 @@ class ReleaseCommand(Command):
                 vcs.push()        
         
         # Now register/upload the package
+        if options.no_wheel:
+            setup_args = "sdist"
+        else:
+            setup_args = "sdist bdist_wheel"
         if options.no_release:
             if options.dry_run:
                 print("Would build dist but not release to PyPi")
             else:
                 print("Build dist, not releasing to PyPi")
-                run_command("python setup.py sdist")
+                run_command("python setup.py %s" % setup_args)
         else:
             if options.dry_run:
                 print("Would have updated PyPi")
@@ -181,9 +192,9 @@ class ReleaseCommand(Command):
                 print("Uploading to PyPi")
                 print("(This may take a while, grab a cuppa. You've done a great job!)")
                 if options.initial or options.register:
-                    run_command("python setup.py register sdist upload")
+                    run_command("python setup.py register %s upload" % setup_args)
                 else:
-                    run_command("python setup.py sdist upload")
+                    run_command("python setup.py %s upload" % setup_args)
         
         print("All done!")
         if not options.dry_run:
