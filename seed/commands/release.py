@@ -153,7 +153,12 @@ class ReleaseCommand(Command):
         
         # Commit the changes we have made
         
-        commit_files = [self.project_dir / "CHANGES.txt", self.package_dir / "__init__.py"]
+        commit_files = [
+            self.project_dir / "CHANGES.txt",
+            self.project_dir / "VERSION",
+            self.project_dir / "setup.py",
+            self.package_dir / "__init__.py",
+        ]
         if options.dry_run:
             print("Would have committed changes to: %s" % ", ".join(commit_files))
         else:
