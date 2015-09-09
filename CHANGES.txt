@@ -4,6 +4,22 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.10.1, Wed 09 Sep 2015
+================================
+
+1a1bdd365b	Attempt to get build running on both 3.2 & nightlies (Adam Charnock)
+521cbb411c	Attempt to get build running on both 3.2 & nightlies (Adam Charnock)
+43b0d23008	Updating travis coverage requirement in order to build on python 3.2 (Adam Charnock)
+e4e0b2016f	Updating travis coverage requirement in order to build on python nightlies (Adam Charnock)
+16e560e856	updating travis build file (Adam Charnock)
+82958ad76b	Updating committed files to include VERSION file (plus setup.py and __init__.py to account for migration) (Adam Charnock)
+9e2d98457d	Fixing tests to check for version in correct location (Adam Charnock)
+e1f76b8826	Adding support for releasing wheels (Adam Charnock)
+a40bab22bb	Documentation cleanup (Adam Charnock)
+23f44a60a6	Moving version into VERSION file (Adam Charnock)
+e224f634a2	Adding tests for help command (and fixing bug) (Adam Charnock)
+
+
 Version 0.9.0, Sat 13 Jun 2015
 ===============================
 
