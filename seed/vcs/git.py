@@ -34,6 +34,9 @@ class GitVcs(BaseVcs):
     def push(self):
         run_command("git push")
         run_command("git push --tags")
+
+    def add(self, file_path):
+        run_command("git add %s" % quote(file_path))
     
     def get_download_url(self, version):
         return None

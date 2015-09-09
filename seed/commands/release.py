@@ -126,7 +126,7 @@ class ReleaseCommand(Command):
             print("Version would be set to %s" % next_version)
         else:
             print("Version written")
-            self.write_version(next_version)
+            self.write_version(vcs, next_version)
         
         # Update the changelog
         
@@ -206,6 +206,12 @@ class ReleaseCommand(Command):
         return self.version_bump(previous_version, type)
     
     def read_version(self):
+        # Read version from VERSION file, with fallback to
+        # __version__ in __init__.py
+        if os.path.exists(self.project_dir / "VERSION"):
+            with open(self.project_dir / "VERSION", "r") as f:
+                return f.read().strip()
+
         with open(self.package_dir / "__init__.py", "r") as f:
             # Read the first 1k - should be safe to assume the 
             # version is in there somewhere
@@ -218,14 +224,53 @@ class ReleaseCommand(Command):
         else:
             return None
     
-    def write_version(self, version):
-        # This will captute STDOUT and overwrite the file
-        for line in fileinput.input(self.package_dir / "__init__.py", inplace=1):
-            if line.startswith("__version__ = "):
-                print("__version__ = '%s'" % version)
-            else:
-                print(line, end='')
-    
+    def write_version(self, vcs, version):
+        version_file = self.project_dir / "VERSION"
+        version_file_is_new = not os.path.exists(version_file)
+
+        with open(version_file, "w") as f:
+            f.write(version)
+
+        if version_file_is_new:
+            self.migrate_version_from_init(version_file, vcs)
+
+    def migrate_version_from_init(self, version_file, vcs):
+        print("Moving package version out of __init__.py and into to ./VERSION")
+        if hasattr(vcs, 'add'):
+            vcs.add(version_file)
+
+        # Update setup.py to read from the new VERSION file
+        with open(self.project_dir / 'setup.py', 'r') as f:
+            lines = f.readlines()
+        with open(self.project_dir / 'setup.py', 'w') as f:
+            for line in lines:
+                if 'import __version__' in line:
+                    continue
+                if 'version=__version__' in line:
+                    line = line.replace(
+                        'version=__version__', "version=open('VERSION').read().strip()")
+                f.write(line)
+
+        # Make sure it is included in the manifest
+        with open(self.project_dir / 'MANIFEST.in', 'a') as f:
+            f.write('include VERSION')
+
+        # Remove __version__ from __init__.py
+        with open(self.package_dir / '__init__.py', 'r') as f:
+            lines = f.readlines()
+        with open(self.package_dir / '__init__.py', 'w') as f:
+            for line in lines:
+                if 'It must be possible to import this file with' in line:
+                    continue
+                if "none of the package's dependencies installed" in line:
+                    continue
+                if '__version__ = ' in line:
+                    continue
+                f.write(line)
+
+        print("Your package's version will now be stored in VERSION")
+        print("You can safely remove __version__ from your __init__.py file")
+
     def write_changelog(self, changes, next_version):
         changelog = self.project_dir / "CHANGES.txt"
         
