@@ -79,8 +79,7 @@ Is on `GitHub <https://github.com/adamcharnock/seed>`_.
 Other notes & about the author
 ==============================
 
-The structure of Seed is heavily based on that of `pip <https://github.com/pypa/pip/>`_. 
-It is still a bit rough around the edges, but the basic stuff is there.
+The structure of Seed is heavily based on that of `pip <https://github.com/pypa/pip/>`_.
 
 I find myself managing a lot of packages as I always have a number of Django projects on the go 
 and sharing reusable code is always a plus. I also use Heroku a lot, but Heroku doesn't play 
@@ -89,10 +88,6 @@ to PyPi rather than just installing them right out of GutHub.
 
 You can find me on...
 
-* `Twitter <http://twitter.com/adamcharnock>`_
+* `adamcharnock.com <https://adamcharnock.com>`_
 * `GitHub <http://github.com/adamcharnock>`_
 
-I work on...
-
-* `PlayNice.ly <http://playnice.ly>`_ - Project management for software developers
-* `Continuous.io <http://continuous.io>`_ - Hosted continuous integration (beta)

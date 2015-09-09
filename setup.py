@@ -9,7 +9,7 @@ setup(
     name='seed',
     version=__version__,
     author='Adam Charnock',
-    author_email='adam@playnice.ly',
+    author_email='adam@adamcharnock.com',
     packages=find_packages(),
     scripts=[],
     url='https://github.com/adamcharnock/seed',
