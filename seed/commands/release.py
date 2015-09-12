@@ -269,7 +269,8 @@ class ReleaseCommand(Command):
 
         # Make sure it is included in the manifest
         with open(self.project_dir / 'MANIFEST.in', 'a') as f:
-            f.write('include VERSION')
+            f.write('\ninclude VERSION')
+            vcs.add(self.project_dir / 'MANIFEST.in')
 
         # Remove __version__ from __init__.py
         with open(self.package_dir / '__init__.py', 'r') as f:
