@@ -4,6 +4,14 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.10.2, Sun 13 Sep 2015
+================================
+
+4cb9b31a5c	Now correctly comitting manifest file which may have been changed (Adam Charnock)
+212d2313ff	Manifest file now written correctly following version migration (Adam Charnock)
+b37081a138	Fixing error in manifest file (Adam Charnock)
+
+
 Version 0.10.1, Wed 09 Sep 2015
 ================================
 
