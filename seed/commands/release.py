@@ -156,6 +156,7 @@ class ReleaseCommand(Command):
         commit_files = [
             self.project_dir / "CHANGES.txt",
             self.project_dir / "VERSION",
+            self.project_dir / "MANIFEST.in",
             self.project_dir / "setup.py",
             self.package_dir / "__init__.py",
         ]
