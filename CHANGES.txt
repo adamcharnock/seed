@@ -4,6 +4,12 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.10.4, Mon 14 Sep 2015
+================================
+
+8cb2e672bb	Updating newly created packages to read version correctly (Adam Charnock)
+
+
 Version 0.10.3, Mon 14 Sep 2015
 ================================
 
