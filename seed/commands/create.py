@@ -68,6 +68,7 @@ class CreateCommand(Command):
             (self.project_dir / "CHANGES.txt", TEMPLATE_CHANGES),
             (self.project_dir / "LICENSE.txt", TEMPLATE_LICENSE),
             (self.project_dir / "MANIFEST.in", TEMPLATE_MANIFEST),
+            (self.project_dir / "VERSION", TEMPLATE_VERSION),
             (self.project_dir / "README.rst", TEMPLATE_README),
             (self.project_dir / "setup.py", TEMPLATE_SETUP),
             (self.package_dir / "__init__.py", TEMPLATE_INIT),
@@ -112,7 +113,9 @@ http://www.opensource.org/licenses/category
 
 TEMPLATE_MANIFEST = """include *.txt
 include *.rst
-recursive-include docs *"""
+recursive-include docs *
+VERSION
+"""
 
 TEMPLATE_README = """%(project_name)s
 ===========================================================
@@ -179,9 +182,6 @@ setup(
 )
 """
 
-TEMPLATE_INIT = """
-# It must be possible to import this file with 
-# none of the package's dependencies installed
+TEMPLATE_INIT = ""
 
-__version__ = '%(version)s'
-"""
+TEMPLATE_VERSION = "%(version)s"
