@@ -4,6 +4,12 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.10.3, Mon 14 Sep 2015
+================================
+
+349a11e7bd	Updating create command to store version in VERSION file rather than __init__.py (Adam Charnock)
+
+
 Version 0.10.2, Sun 13 Sep 2015
 ================================
 
