@@ -156,11 +156,9 @@ TEMPLATE_SETUP = """#!/usr/bin/env python
 from os.path import exists
 from setuptools import setup, find_packages
 
-from %(package_name)s import __version__
-
 setup(
     name='%(project_name)s',
-    version=__version__,
+    version=open('VERSION').read().strip(),
     # Your name & email here
     author='',
     author_email='',
