@@ -4,6 +4,12 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.10.5, Wed 16 Sep 2015
+================================
+
+1f1964ae95	Correcting Manifest.in template (Adam Charnock)
+
+
 Version 0.10.4, Mon 14 Sep 2015
 ================================
 
