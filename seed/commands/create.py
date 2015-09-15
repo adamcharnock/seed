@@ -114,7 +114,7 @@ http://www.opensource.org/licenses/category
 TEMPLATE_MANIFEST = """include *.txt
 include *.rst
 recursive-include docs *
-VERSION
+include VERSION
 """
 
 TEMPLATE_README = """%(project_name)s
