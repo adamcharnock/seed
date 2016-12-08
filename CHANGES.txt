@@ -4,6 +4,19 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.11.0, Thu 08 Dec 2016
+================================
+
+acb969b603	Adding clarification to create commands success output #11 (Adam Charnock)
+246aa650a4	Refreshing docs somewhat (Adam Charnock)
+871c423ce6	Updating docs as per #11 (Adam Charnock)
+70e518bc64	Breaking change: Tags now created without the 'v' prefix. See changelog in docs. (Adam Charnock)
+521bfddf28	Fixing test for version now using VERSION file (Adam Charnock)
+672f2d3137	Moving tests to seed_tests (Adam Charnock)
+55c263a0ad	Fixing missing import (Adam Charnock)
+8e8d6ba320	Adding test for unicode issues (Adam Charnock)
+
+
 Version 0.10.5, Wed 16 Sep 2015
 ================================
 
