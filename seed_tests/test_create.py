@@ -31,6 +31,7 @@ class TestCreateCommand(BaseSeedTest):
             'setup.py',
             'testpkg',
             'docs',
+            'VERSION',
         ]))
         self.assertEqual(os.listdir(os.path.join(self.pkg_dir, 'testpkg')), [
             '__init__.py',
