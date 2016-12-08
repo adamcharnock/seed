@@ -2,6 +2,8 @@ import sys
 
 from pkgutil import walk_packages
 
+from seed.exceptions import NoVcsError
+
 vcs_dict = {}
 
 def load_vcs(name):
@@ -73,4 +75,3 @@ class BaseVcs(object):
     
     def make_tag_name(self, version):
         return "v%s" % version
-    
