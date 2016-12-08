@@ -2,7 +2,7 @@ from optparse import Values
 import os
 from seed.commands.help import HelpCommand
 from seed.exceptions import CommandError
-from tests import BaseSeedTest
+from seed_tests import BaseSeedTest
 
 
 class TestCreateCommand(BaseSeedTest):

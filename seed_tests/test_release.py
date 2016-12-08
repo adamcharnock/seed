@@ -1,8 +1,6 @@
 # coding=utf-8
-from optparse import Values
 import os
-from seed.commands.release import ReleaseCommand
-from tests import BaseSeedTest
+from seed_tests import BaseSeedTest
 
 
 class TestReleaseCommand(BaseSeedTest):
