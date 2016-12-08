@@ -41,7 +41,7 @@ class CreateCommand(Command):
         
         print("All done!")
         if not self.dry_run:
-            print("You'll need to make some changes to setup.py (see the comments),")
+            print("You'll need to make some changes to setup.py (see comments in setup.py),")
             print("and putting something sensible in LICENSE.txt & README.rst ")
             print("is probably a good idea.")
     
