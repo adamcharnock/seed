@@ -1,3 +1,4 @@
+import os
 import sys
 
 from pkgutil import walk_packages
@@ -74,4 +75,4 @@ class BaseVcs(object):
         pass
     
     def make_tag_name(self, version):
-        return "v%s" % version
+        return '{}{}'.format(os.environ.get('SEED_VERSION_PREFIX', ''), version)

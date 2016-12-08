@@ -71,6 +71,20 @@ Again, options are documented here::
 about your project. If you created your project using the ``create`` command, 
 then you are probably fine, but you may need to do a little hacking otherwise.
 
+Change Log
+==========
+
+0.11.0
+------
+
+ * **Breaking change**: Tags are now created in the form '1.2.3' rather than 'v1.2.3'. This
+   is a more standard notation but will cause issues with packages which are using the
+   former notation. Solutions are:
+
+   * Create a new tag in the form '1.2.3' which points to your latest release
+   * Set the environment variable ``SEED_VERSION_PREFIX=v``
+
+
 Source
 ======
 
