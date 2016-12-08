@@ -1,3 +1,4 @@
+# coding=utf-8
 from optparse import Values
 import os
 from seed.commands.release import ReleaseCommand
@@ -69,3 +70,13 @@ class TestReleaseCommand(BaseSeedTest):
         ok = self.run_with_coverage('release --release=2.3.4 --no-release')
         self.assertEqual(ok, 0)
         self.assertVersion('2.3.4')
+
+    def test_unicode(self):
+        self.create_package()
+        os.system('git commit -m "Initial cømmit"')
+        self.write_meta_data()
+        self.initial_release()
+        ok = self.run_with_coverage('release --no-release')
+        self.assertEqual(ok, 0)
+        # bug release by default
+        self.assertVersion('0.1.1')
