@@ -10,7 +10,7 @@ Welcome to Seed's documentation!
    :maxdepth: 2
    
 
-Seed is an experiment in making releasing PyPi packages trivially 
+Seed is an experiment in making releasing PyPi packages trivially
 easy. For example, the ``release`` command will:
 
 * Increment the version number in ``__init__.py``
@@ -48,6 +48,9 @@ your login details into ``~/.pypirc`` as follows::
 Getting started
 ===============
 
+Packages without existing releases
+----------------------------------
+
 If you need an entirely fresh package then you can do this::
 
     seed create --dry-run  # Do a dry run to make sure everything looks right
@@ -57,19 +60,43 @@ You can also pass a few options to the ``create`` command. See the help for deta
 
     seed help create
 
+You can then do a release using::
 
-If you already have a package you can release it using::
+    # For the first release you must use --initial:
+    seed release --initial
 
-    seed release --dry-run  # Do a dry run to make sure everything looks right
-    seed release
+    # Subsequent releases can be done via ONE of:
+    seed release --bug    # A bug version pump (i.e. 0.0.1)
+    seed release --minor  # A minor version pump (i.e. 0.1.0)
+    seed release --major  # A major version pump (i.e. 1.0.0)
+    seed release          # Equivalent to seed release --bug
 
-Again, options are documented here::
-
+    # More details about how to perform releases
     seed help release
 
-**Notes on releasing:** The release process makes a bunch of assumptions 
-about your project. If you created your project using the ``create`` command, 
-then you are probably fine, but you may need to do a little hacking otherwise.
+
+Packages with existing releases
+----------------------------------
+
+Packages with existing release will need the following:
+
+ * A ``/VERSION`` file containing the latest version, such as ``1.2.0``
+ * A git tag with the same name as the version (i.e. ``1.2.0``) pointing to the relevant commit
+
+You can then release it using::
+
+    # Do a dry run to make sure everything looks right
+    seed release --dry-run
+
+    # Do the release using ONE of:
+    seed release --bug    # A bug version pump (i.e. 0.0.1)
+    seed release --minor  # A minor version pump (i.e. 0.1.0)
+    seed release --major  # A major version pump (i.e. 1.0.0)
+    seed release          # Equivalent to seed release --bug
+
+    # More details about how to perform releases
+    seed help release
+
 
 Change Log
 ==========
