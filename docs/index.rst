@@ -3,24 +3,21 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Seed's documentation!
-===========================================
+Python Seed
+===========
 
 .. toctree::
    :maxdepth: 2
    
 
-Seed is an experiment in making releasing PyPi packages trivially
+Seed is designed to make releasing PyPi packages trivially
 easy. For example, the ``release`` command will:
 
-* Increment the version number in ``__init__.py``
+* Increment the version number in ``VERSION``
 * Update CHANGES.txt with commit summaries & authors
 * Tag the release
 * Commit the above changes
 * Register/upload your package to PyPi
-
-I am not sure if a need for this exists, but my hope is that it will 
-lower the time & effort needed to create and release Python packages.
 
 Installation
 ============
@@ -42,7 +39,7 @@ your login details into ``~/.pypirc`` as follows::
 
 .. note::
 
-    Storing your password in plaintext is clearly not ideal. If anyone knows of a workaround 
+    Storing your password in plaintext is clearly not ideal. If anyone knows of a workaround
     I would love to hear it.
 
 Getting started
@@ -51,7 +48,7 @@ Getting started
 Packages without existing releases
 ----------------------------------
 
-If you need an entirely fresh package then you can do this::
+If you need an entirely fresh package then you can create a skeleton as follows::
 
     seed create --dry-run  # Do a dry run to make sure everything looks right
     seed create
@@ -98,7 +95,7 @@ You can then release it using::
     seed help release
 
 
-Change Log
+Change log
 ==========
 
 0.11.0
@@ -117,15 +114,10 @@ Source
 
 Is on `GitHub <https://github.com/adamcharnock/seed>`_.
 
-Other notes & about the author
-==============================
+Credits & about the author
+==========================
 
 The structure of Seed is heavily based on that of `pip <https://github.com/pypa/pip/>`_.
-
-I find myself managing a lot of packages as I always have a number of Django projects on the go 
-and sharing reusable code is always a plus. I also use Heroku a lot, but Heroku doesn't play 
-nicely when installing dependencies via external URLs, hence my desire to release more packages 
-to PyPi rather than just installing them right out of GutHub.
 
 You can find me on...
 
