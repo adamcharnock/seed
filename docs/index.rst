@@ -19,6 +19,8 @@ easy. For example, the ``release`` command will:
 * Commit the above changes
 * Register/upload your package to PyPi
 
+Requires Python >= 2.7 or Python >= 3.4
+
 Installation
 ============
 
