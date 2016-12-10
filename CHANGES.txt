@@ -4,6 +4,13 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.11.1, Sat 10 Dec 2016
+================================
+
+2d6b15ec71	Changing supported python versions (>=2.7, >= 3.4) (Adam Charnock)
+f278e9a050	Fixing assertVersion() (Adam Charnock)
+
+
 Version 0.11.0, Thu 08 Dec 2016
 ================================
 
