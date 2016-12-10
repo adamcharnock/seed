@@ -55,7 +55,7 @@ class BaseSeedTest(unittest.TestCase):
             version = f.read()
         self.assertTrue(version in version)
 
-        ok = os.system("git show-ref --tags | grep `git log --format='%H' -n 1` | grep 'v{0}'".format(version))
+        ok = os.system("git show-ref --tags | grep `git log --format='%H' -n 1` | grep '{0}'".format(version))
         self.assertEqual(ok, 0, "Latest version not tagged in git")
 
     def run_with_coverage(self, command):
