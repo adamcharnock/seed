@@ -100,6 +100,16 @@ You can then release it using::
 Change log
 ==========
 
+0.11.2
+------
+
+ * Default package creation now supports Manifest files by default
+
+0.11.1
+------
+
+ * Dropping support for Python 2.6 & 3.3. Now supporting >= 2.7 and >= 3.4.
+
 0.11.0
 ------
 
