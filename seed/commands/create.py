@@ -43,8 +43,9 @@ class CreateCommand(Command):
         if not self.dry_run:
             print("You'll need to make some changes to setup.py (see comments in setup.py),")
             print("and putting something sensible in LICENSE.txt & README.rst ")
-            print("is probably a good idea.")
-    
+            print("is probably a good idea. You can optionally install 'check-manifest' ")
+            print("to assist in creating a manifest if your packs includes static files.")
+
     def create_dirs(self):
         dirs = [
             self.project_dir / "bin", 
@@ -177,6 +178,8 @@ setup(
     install_requires=[
         
     ],
+    # Ensure we include files from the manifest
+    include_package_data=True,
 )
 """
 
