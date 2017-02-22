@@ -1,6 +1,5 @@
 import os
 import os.path
-from path import path
 
 from seed.exceptions import CommandError
 from seed.commands import Command

@@ -4,7 +4,7 @@ import difflib
 import os
 from distutils.core import run_setup
 
-from path import path
+from path import Path
 from pkgutil import walk_packages
 
 from seed.baseparser import parser
@@ -85,7 +85,7 @@ class Command(object):
         
         # Give preference to the environment variable here as it will not 
         # derefrence sym links
-        self.project_dir = path(os.getenv('PWD') or os.getcwd())
+        self.project_dir = Path(os.getenv('PWD') or os.getcwd())
         
         # Try and work out the project name
         distribution = self.get_distribution()

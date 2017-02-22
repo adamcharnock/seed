@@ -17,7 +17,7 @@ setup(
     long_description=open('README.rst').read() if exists("README.rst") else "",
     entry_points=dict(console_scripts=['seed=seed.run:main']),
     install_requires=[
-        "path.py>=2.2.2",
+        "path.py>=10, <11",
         'wheel',
     ],
     classifiers=[

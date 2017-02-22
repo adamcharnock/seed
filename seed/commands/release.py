@@ -3,7 +3,7 @@ from __future__ import print_function
 import os
 import re
 import sys
-from path import path
+from path import Path
 import fileinput
 from datetime import datetime
 
@@ -21,7 +21,7 @@ class ReleaseCommand(Command):
     def __init__(self):
         super(ReleaseCommand, self).__init__()
         
-        default_name = path(os.getcwd()).name.lower().replace("-", "")
+        default_name = Path(os.getcwd()).name.lower().replace("-", "")
         
         self.parser.add_option(
             '-r', '--release',
