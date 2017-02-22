@@ -4,6 +4,12 @@ This file will be added to as part of each release
 
 ----
 
+Version 0.11.3, Wed 22 Feb 2017
+================================
+
+afe327d88f	Fixes for changes in path.py (Adam Charnock)
+
+
 Version 0.11.2, Mon 12 Dec 2016
 ================================
 
